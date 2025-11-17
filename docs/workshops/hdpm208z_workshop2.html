@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Andrew R Wood">
+<meta name="dcterms.date" content="2025-11-07">
+
+<title>HPDM208Z Stratified Medicine Workshop 2: Defining disease status using health data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="hdpm208z_workshop2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/popper.min.js"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hdpm208z_workshop2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hdpm208z_workshop2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hdpm208z_workshop2_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hdpm208z_workshop2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hdpm208z_workshop2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hdpm208z_workshop2_files/libs/bootstrap/bootstrap-cf5ff342f8fa336b79bb8d95a1f8207e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">HPDM208Z Stratified Medicine Workshop 2: Defining disease status using health data</h1>
+            <p class="subtitle lead">MSc Health Data Science, University of Exeter</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Prof.&nbsp;Andrew R Wood <a href="mailto:A.R.Wood@exeter.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2025-11-07</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#aims-of-workshop" id="toc-aims-of-workshop" class="nav-link" data-scroll-target="#aims-of-workshop"><span class="header-section-number">2</span> Aims of workshop</a></li>
+  <li><a href="#conda-environment" id="toc-conda-environment" class="nav-link" data-scroll-target="#conda-environment"><span class="header-section-number">3</span> Conda environment</a></li>
+  <li><a href="#workshop-data" id="toc-workshop-data" class="nav-link" data-scroll-target="#workshop-data"><span class="header-section-number">4</span> Workshop data</a>
+  <ul class="collapse">
+  <li><a href="#uk-biobank-field-names" id="toc-uk-biobank-field-names" class="nav-link" data-scroll-target="#uk-biobank-field-names"><span class="header-section-number">4.1</span> UK Biobank field names</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">4.2</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#activity-1-defining-casecontrol-status" id="toc-activity-1-defining-casecontrol-status" class="nav-link" data-scroll-target="#activity-1-defining-casecontrol-status"><span class="header-section-number">5</span> Activity 1: Defining case/control status</a>
+  <ul class="collapse">
+  <li><a href="#define-colorectal-cancer-cases-and-controls" id="toc-define-colorectal-cancer-cases-and-controls" class="nav-link" data-scroll-target="#define-colorectal-cancer-cases-and-controls"><span class="header-section-number">5.1</span> Define colorectal cancer cases and controls</a></li>
+  <li><a href="#tabulate-and-compare-numbers-of-cases-and-controls" id="toc-tabulate-and-compare-numbers-of-cases-and-controls" class="nav-link" data-scroll-target="#tabulate-and-compare-numbers-of-cases-and-controls"><span class="header-section-number">5.2</span> Tabulate and compare numbers of cases and controls</a></li>
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">5.3</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#activity-2-testing-effects-of-age-on-cancer-risk" id="toc-activity-2-testing-effects-of-age-on-cancer-risk" class="nav-link" data-scroll-target="#activity-2-testing-effects-of-age-on-cancer-risk"><span class="header-section-number">6</span> Activity 2: Testing effects of age on cancer risk</a>
+  <ul class="collapse">
+  <li><a href="#run-regression-models-to-test-if-age-associated-with-risk" id="toc-run-regression-models-to-test-if-age-associated-with-risk" class="nav-link" data-scroll-target="#run-regression-models-to-test-if-age-associated-with-risk"><span class="header-section-number">6.1</span> Run regression models to test if age associated with risk</a></li>
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2"><span class="header-section-number">6.2</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#activity-3-refining-the-control-group" id="toc-activity-3-refining-the-control-group" class="nav-link" data-scroll-target="#activity-3-refining-the-control-group"><span class="header-section-number">7</span> Activity 3: Refining the control group</a>
+  <ul class="collapse">
+  <li><a href="#cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources" id="toc-cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources" class="nav-link" data-scroll-target="#cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources"><span class="header-section-number">7.1</span> Cross tabulate cases and controls from cancer registry with those derived from other data sources</a></li>
+  <li><a href="#make-a-cleaner-colorectal-cancer-casecontrol-variable" id="toc-make-a-cleaner-colorectal-cancer-casecontrol-variable" class="nav-link" data-scroll-target="#make-a-cleaner-colorectal-cancer-casecontrol-variable"><span class="header-section-number">7.2</span> Make a cleaner colorectal cancer case/control variable</a></li>
+  <li><a href="#run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" id="toc-run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" class="nav-link" data-scroll-target="#run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls"><span class="header-section-number">7.3</span> Run regression model to test if age associated with risk using <code>ca_reg_crc2</code> to define cases and controls</a></li>
+  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">7.4</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#activity-4-testing-other-risk-factors-against-cancer-risk" id="toc-activity-4-testing-other-risk-factors-against-cancer-risk" class="nav-link" data-scroll-target="#activity-4-testing-other-risk-factors-against-cancer-risk"><span class="header-section-number">8</span> Activity 4: Testing other risk factors against cancer risk</a>
+  <ul class="collapse">
+  <li><a href="#questions-4" id="toc-questions-4" class="nav-link" data-scroll-target="#questions-4"><span class="header-section-number">8.1</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#activity-5-defining-and-analysing-chronic-renal-failure" id="toc-activity-5-defining-and-analysing-chronic-renal-failure" class="nav-link" data-scroll-target="#activity-5-defining-and-analysing-chronic-renal-failure"><span class="header-section-number">9</span> Activity 5 – Defining and analysing chronic renal failure</a>
+  <ul class="collapse">
+  <li><a href="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" id="toc-on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" class="nav-link" data-scroll-target="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r"><span class="header-section-number">9.1</span> On the Linux command line, copy the <code>define_crc.r</code> script to a new script file called <code>define_crf.r</code></a></li>
+  <li><a href="#update-the-define_crf.r-script" id="toc-update-the-define_crf.r-script" class="nav-link" data-scroll-target="#update-the-define_crf.r-script"><span class="header-section-number">9.2</span> Update the <code>define_crf.r</code> script</a></li>
+  <li><a href="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" id="toc-compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" class="nav-link" data-scroll-target="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry"><span class="header-section-number">9.3</span> Compare number of cases and controls using HES, cancer registry, and death registry:</a></li>
+  <li><a href="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" id="toc-explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="nav-link" data-scroll-target="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">9.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</a></li>
+  <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">9.5</span> Questions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>In this workshop, you will identify individuals with specific health outcomes from several data sources as outlined in the table below.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Workshop Health Data Sources</caption>
+<colgroup>
+<col style="width: 55%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Source</th>
+<th>Data Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inpatient Hospital Episode Statistics (HES)</td>
+<td><ul>
+<li>England: Jan 1996 - Mar 2017</li>
+<li>Wales: Jan 1998 - Feb 2016</li>
+<li>Scotland: Jan 1981 - Oct 2016</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Cancer Registry</td>
+<td><ul>
+<li>England: Jan 1971 - Mar 2016</li>
+<li>Wales: Jan 1971 - Mar 2016</li>
+<li>Scotland: Jan 1957 - Oct 2015</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Death registry</td>
+<td><ul>
+<li>England: Jan 2006 - Jan 2018</li>
+<li>Wales: Jan 2006 - Jan 2018</li>
+<li>Scotland: Jan 2006 - Nov 2016</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Self-reported study interview</td>
+<td><ul>
+<li>Baseline: Jan 2006 - Dec 2010</li>
+<li>Follow-up: Jan 2012 - Jan 2015</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>These data sources reflect those available in large-scale population-based studies, such as the UK Biobank, that are available for health researchers</p>
+<p>The health outcomes you will focus on in this workshops are:</p>
+<ul>
+<li><strong>Colorectal Cancer</strong></li>
+<li><strong>Chronic Renal Failure</strong></li>
+</ul>
+<p>You will use codes provided in the following publication to define cases and controls for each:<br>
+<a href="https://doi.org/10.1371/journal.pgen.1008405">Censin JC, et al.&nbsp;(2019) Causal relationships between obesity and the leading causes of death in women and men. PLoS Genet 15(10): e1008405</a></p>
+</section>
+<section id="aims-of-workshop" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Aims of workshop</h1>
+<ul>
+<li>Test for differences in deriving disease cases when using different sources of health data</li>
+<li>Examine the effects of potential risk factors among different case derivations</li>
+<li>Provide insight into potential biases that you may want to consider when chosing data sources for applications in data science</li>
+</ul>
+</section>
+<section id="conda-environment" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Conda environment</h1>
+<p>Before attempting this workshop, you should activate the <code>hpdm208z</code> conda environment that will provide the R through Jupyter Lab and required library dependencies:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate hpdm208z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="workshop-data" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Workshop data</h1>
+<p>The data for this workshop containing data on 10,000 individuals has been provided in a form that represents that available in UK Biobank (but is NOT UK Biobank data). The file can be found here:</p>
+<p><code>/home/ubuntu/hpdm208z/workshops/disease_codes/disease_codes.txt</code></p>
+<p>Within the dataset you will find the following variables:</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Variables with standard naming found in workshop data</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>Unique study participant ID</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Age when individual entered research study (age at study baseline)</td>
+</tr>
+<tr class="odd">
+<td><code>sex</code></td>
+<td>Self-reported sex (not genetic sex)</td>
+</tr>
+<tr class="even">
+<td><code>bmi</code></td>
+<td>Body-mass Index measured by researchers recruiting study participants</td>
+</tr>
+<tr class="odd">
+<td><code>smoker</code></td>
+<td>Smoking status: 0=never; 1=former; 2=current</td>
+</tr>
+</tbody>
+</table>
+<section id="uk-biobank-field-names" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="uk-biobank-field-names"><span class="header-section-number">4.1</span> UK Biobank field names</h2>
+<p>In addition, you will find the remaining columns labelled to mimic that of UK Biobank and follow a standard format:</p>
+<p><code>X_FIELD_VISIT_INSTANCE</code>.</p>
+<p>Where</p>
+<p><code>FIELD</code> represents the field name as would be found in the UK Biobank.<br>
+<code>VISIT</code> represents the n’th visit of the study partipant on which the data was recorded:<br>
+0=baseline, 1=first follow-up visit, 2=second follow-up visit.<br>
+<code>INSTANCE</code> represents the n’th value entered on the given visit associated with the field.</p>
+<p>Example:</p>
+<p><code>X_20002_0_9</code></p>
+<p>This variables represents:</p>
+<ul>
+<li>a non-cancer illness code (20002)</li>
+<li>recorded at the start (baseline) visit of an individual to a study (0);</li>
+<li>where a 9th value may been provided by a study participant (9);<br>
+(missing for individuals with &lt;9 codes could be assigned to the participant).</li>
+</ul>
+<p>Fields in the dataset that are in this format are described below. Following the “Data-Coding” links within the UKB pages provides details of how specific codes map to health outcomes.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Variables with UKB naming conventions found in workshop data</caption>
+<thead>
+<tr class="header">
+<th>Field Name</th>
+<th>Description</th>
+<th>Source</th>
+<th>Coding</th>
+<th>UKB Showcase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>20001</code></td>
+<td>Cancer code</td>
+<td>Interview</td>
+<td>Study-defined</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=20001">Link</a></td>
+</tr>
+<tr class="even">
+<td><code>20002</code></td>
+<td>Non-cancer illness code</td>
+<td>Interview</td>
+<td>Study-defined</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=20002">Link</a></td>
+</tr>
+<tr class="odd">
+<td><code>40001</code></td>
+<td>Primary cause of death</td>
+<td>Death Register</td>
+<td>ICD10</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=40001">Link</a></td>
+</tr>
+<tr class="even">
+<td><code>40002</code></td>
+<td>Secondary causes of death</td>
+<td>Death Register</td>
+<td>ICD10</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=40002">Link</a></td>
+</tr>
+<tr class="odd">
+<td><code>40006</code></td>
+<td>Type of Cancer</td>
+<td>Cancer Register</td>
+<td>ICD10</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=40006">Link</a></td>
+</tr>
+<tr class="even">
+<td><code>40013</code></td>
+<td>Type of Cancer</td>
+<td>Cancer Register</td>
+<td>ICD9</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=40013">Link</a></td>
+</tr>
+<tr class="odd">
+<td><code>41202</code></td>
+<td>Inpatient primary diagnoses</td>
+<td>HES</td>
+<td>ICD10</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=41202">Link</a></td>
+</tr>
+<tr class="even">
+<td><code>41203</code></td>
+<td>Inpatient primary diagnoses</td>
+<td>HES</td>
+<td>ICD9</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=41203">Link</a></td>
+</tr>
+<tr class="odd">
+<td><code>41204</code></td>
+<td>Inpatient secondary diagnoses</td>
+<td>HES</td>
+<td>ICD10</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=41204">Link</a></td>
+</tr>
+<tr class="even">
+<td><code>41205</code></td>
+<td>Inpatient secondary diagnoses</td>
+<td>HES</td>
+<td>ICD9</td>
+<td><a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=41205">Link</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="questions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="questions"><span class="header-section-number">4.2</span> Questions</h2>
+<ul>
+<li>Do you think structuring data using multiple variables that allow for some multiple instances of disease codes is a good way to store the data?</li>
+<li>What alternative formats might you consider?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="activity-1-defining-casecontrol-status" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Activity 1: Defining case/control status</h1>
+<p>The first task is to run a script that will define cases for colorectal cancer from each data source separately. Individuals not classified as a case will be labelled as a control for the respetive data source. Based on the derivations used in the <a href="https://doi.org/10.1371/journal.pgen.1008405">Censin et al.</a> paper, the following codes will be used:</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Codes used to derive colorectal cancer cases</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 18%">
+<col style="width: 27%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Source</th>
+<th>ICD9 codes</th>
+<th>ICD10 codes</th>
+<th>Study Codes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HES</td>
+<td><code>153</code>, <code>154</code></td>
+<td><code>C18</code>, <code>C19</code>, <code>C20</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Cancer Register</td>
+<td><code>153</code>, <code>154</code></td>
+<td><code>C18</code>, <code>C19</code>, <code>C20</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Death Register</td>
+<td></td>
+<td><code>C18</code>, <code>C19</code>, <code>C20</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Interview</td>
+<td></td>
+<td></td>
+<td><code>1020</code>, <code>1022</code>, <code>1023</code></td>
+</tr>
+</tbody>
+</table>
+<section id="define-colorectal-cancer-cases-and-controls" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="define-colorectal-cancer-cases-and-controls"><span class="header-section-number">5.1</span> Define colorectal cancer cases and controls</h2>
+<p>Run script to define colorectal cancer cases and controls using the data sources</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"define_crc.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Running this script will create an R data frame called <code>disease_codes</code>.</p>
+<p>Run the following command to see the names of the data frame.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(disease_codes))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The following variables should have been added to the <code>disease_codes</code> data frame that contains all of the original data, where <code>1</code>=case and <code>0</code>=control:</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Variables created to label cases and controls for colorectal cancer</caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hes_diag_crc</code></td>
+<td>Disease status based on hospital data</td>
+</tr>
+<tr class="even">
+<td><code>ca_reg_crc</code></td>
+<td>Disease status based on cancer register</td>
+</tr>
+<tr class="odd">
+<td><code>death_diag_crc</code></td>
+<td>Disease status based on death register</td>
+</tr>
+<tr class="even">
+<td><code>self_rep_crc</code></td>
+<td>Disease status based on self-reporting at study interview</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tabulate-and-compare-numbers-of-cases-and-controls" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="tabulate-and-compare-numbers-of-cases-and-controls"><span class="header-section-number">5.2</span> Tabulate and compare numbers of cases and controls</h2>
+<p>After running the script above, you should tabulate the number of cases and controls derived from each of the data sources listed that are held in the variables above:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using HES data:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(disease_codes<span class="sc">$</span>hes_diag_crc)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using cancer registry data:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using death registry data:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using death registry data:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="questions-1" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">5.3</span> Questions</h2>
+<ul>
+<li>Do you notice andy difference in numbers?</li>
+<li>If so, what do you think explains this?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="activity-2-testing-effects-of-age-on-cancer-risk" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Activity 2: Testing effects of age on cancer risk</h1>
+<p>One of the main risk factors for developing colorectal cancer include is being older (Cancer Research UK). We will explore the risk of colorectal cancer associated with age using the colorectal cancer cases/controls coded from the different data sources.</p>
+<section id="run-regression-models-to-test-if-age-associated-with-risk" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="run-regression-models-to-test-if-age-associated-with-risk"><span class="header-section-number">6.1</span> Run regression models to test if age associated with risk</h2>
+<p>Run univariable (has one independent variable) logistic regression models with the different colorectal cancer variables to test the effects of age on colorectal cancer. Also calculate the 95% confidence interval for each effect:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using self-report data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by self data:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">glm</span>(self_rep_crc <span class="sc">~</span> age, <span class="at">data=</span>disease_codes, <span class="at">family=</span>binomial))[[<span class="st">"coefficients"</span>]]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base OR      = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base L95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base U95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using HES data</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by HES:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using Death Registry data</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by death registry data:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Cases and controls defined using Cancer Registry data</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by cancer registry data:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="questions-2" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="questions-2"><span class="header-section-number">6.2</span> Questions</h2>
+<ul>
+<li>Overall, are the results consistent with each other and what do they tell us?</li>
+<li>Which colorectal cancer variable has the greatest estimated risk of colorectal cancer with each year increase in age?</li>
+<li>Which colorectal cancer variable has the smallest estimated risk of colorectal cancer with each year increase in age?</li>
+<li>What are the potential issues of using baseline age for these analyses?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="activity-3-refining-the-control-group" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Activity 3: Refining the control group</h1>
+<p>In the analyses of cancer, we would usually consider the UK cancer registry data to be the most accurate for defining cases, especially as this data undergo additional cleaning and validation.</p>
+<p>Although specific cancer cases identified from the cancer registry data are likely the most accurate, we might want to be sure that the control group (defined as not being in the registry for a specific cancer) does not include anyone who has ever had a respective cancer diagnosis recorded in other data sources.</p>
+<p>Therefore, we will make a “cleaner” control group by removing individuals from our analysis who are not recorded as having cancer based on the cancer registry data but are flagged elsewhere as having cancer elsewhere.</p>
+<section id="cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources"><span class="header-section-number">7.1</span> Cross tabulate cases and controls from cancer registry with those derived from other data sources</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross tablulate cancer registry data with HES:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(disease_codes<span class="sc">$</span>hes_diag_crc, ukb_data<span class="sc">$</span>ca_reg_crc)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross tablulate cancer registry data with death registry:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross tablulate cancer registry data with self-report:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="make-a-cleaner-colorectal-cancer-casecontrol-variable" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="make-a-cleaner-colorectal-cancer-casecontrol-variable"><span class="header-section-number">7.2</span> Make a cleaner colorectal cancer case/control variable</h2>
+<p>Create a new varibale called <code>ca_reg_crc2</code> based on cases from cancer registry and controls from concordance across other data sources.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code here to create new variable with the cases and cleaner controls.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude or set to missing (NA) anyone who are:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     not recoded in cancer register as having colorectal cancer AND</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     recorded as having colorectal cancer in HES, death register or interview</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls"><span class="header-section-number">7.3</span> Run regression model to test if age associated with risk using <code>ca_reg_crc2</code> to define cases and controls</h2>
+<p>Check the association of age with risk of colorectal cancer for the new variable ca_reg_crc2. Also calculate the 95% confidence intervals as before:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by cancer registry and cleaned control set:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">glm</span>(ca_reg_crc2 <span class="sc">~</span> age, <span class="at">data=</span>disease_codes, <span class="at">family=</span>binomial))[[<span class="st">"coefficients"</span>]]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base OR      = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base L95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base U95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="questions-3" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">7.4</span> Questions</h2>
+<ul>
+<li>How many people have been excluded from the control group based on the criteria above?</li>
+<li>Have the results for the effect of age on colorectal cancer risk changed?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="activity-4-testing-other-risk-factors-against-cancer-risk" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Activity 4: Testing other risk factors against cancer risk</h1>
+<p>Modify the logistic regression models to examine the effect of sex, bmi, and smoking status on colorectal cancer risk <code>ca_reg_crc2</code>. Note: smoking is a categorical variable so ensure your model treats it as a “factor” (<code>0</code>=never; <code>1</code>=former; <code>2</code>=current).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against BMI:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Sex:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Smoking status:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Place age, sex, BMI, smoking status as independent variables into a single multivariable logistic regression model</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against all exposures above:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="questions-4" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="questions-4"><span class="header-section-number">8.1</span> Questions</h2>
+<ul>
+<li>Which of these risk factors are associated with colorectal cancer risk in the univariable models?</li>
+<li>Which risk factors remain associated with colorectal cancer in the multivariable model?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="activity-5-defining-and-analysing-chronic-renal-failure" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Activity 5 – Defining and analysing chronic renal failure</h1>
+<section id="on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r"><span class="header-section-number">9.1</span> On the Linux command line, copy the <code>define_crc.r</code> script to a new script file called <code>define_crf.r</code></h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> define_crc.r define_crf.r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="update-the-define_crf.r-script" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="update-the-define_crf.r-script"><span class="header-section-number">9.2</span> Update the <code>define_crf.r</code> script</h2>
+<p><a href="https://doi.org/10.1371/journal.pgen.1008405.s001">Supplementary Table B</a> of <a href="https://doi.org/10.1371/journal.pgen.1008405">Censin et al.&nbsp;(2019)</a> provides disease outcomes and diagnosis codes used to define disease cases and controls.</p>
+<p>Use this table to create an updated R script to define cases for “Renal failure – chronic” based on ICD9 and ICD10 codes.</p>
+</section>
+<section id="compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry"><span class="header-section-number">9.3</span> Compare number of cases and controls using HES, cancer registry, and death registry:</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate numbers of cases and controls based on hospital data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate numbers of cases and controls based on cancer registry</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">9.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</h2>
+<p>Perform logistic regression on the disease definition above with the highest number of cases to determine the effect of age, sex, bmi and smoking status separately (univariable logistic regression models) and together (multivariable logistic regression model)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert code to run models here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="questions-5" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="questions-5"><span class="header-section-number">9.5</span> Questions</h2>
+<ul>
+<li>Do you notice any noticable changes to effect estimates of the independent variables between he univariable and multivariable?</li>
+<li>Is there an association with smoking status? If so, what alternative explanation could there be to this?</li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
