@@ -170,7 +170,7 @@ window.Quarto = {
   <li><a href="#removing-outliers-of-remaining-weight-distribution" id="toc-removing-outliers-of-remaining-weight-distribution" class="nav-link" data-scroll-target="#removing-outliers-of-remaining-weight-distribution"><span class="header-section-number">8.4</span> Removing outliers of remaining weight distribution</a>
   <ul class="collapse">
   <li><a href="#parametric-approaches-to-removing-extremeoutlying-data-points" id="toc-parametric-approaches-to-removing-extremeoutlying-data-points" class="nav-link" data-scroll-target="#parametric-approaches-to-removing-extremeoutlying-data-points"><span class="header-section-number">8.4.1</span> Parametric approaches to removing extreme/outlying data points</a></li>
-  <li><a href="#non-parameter-approaches-to-outlying-data-points" id="toc-non-parameter-approaches-to-outlying-data-points" class="nav-link" data-scroll-target="#non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parameter approaches to outlying data points</a></li>
+  <li><a href="#non-parametric-approaches-to-outlying-data-points" id="toc-non-parametric-approaches-to-outlying-data-points" class="nav-link" data-scroll-target="#non-parametric-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parametric approaches to outlying data points</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">8.4.3</span> Questions</a></li>
   </ul></li>
   </ul></li>
@@ -645,7 +645,7 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc1)) <span class="sc">+</span></span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of QC'd weight valuesI"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of QC'd weight values"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">=</span> </span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
@@ -783,8 +783,8 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </div>
 <p>As a results, we have taken out some data points at the higher end of the distribution but have not removed any potential outliers at the bottom of the distribution (e.g.&nbsp;weight=32kg).</p>
 </section>
-<section id="non-parameter-approaches-to-outlying-data-points" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parameter approaches to outlying data points</h3>
+<section id="non-parametric-approaches-to-outlying-data-points" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="non-parametric-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parametric approaches to outlying data points</h3>
 <p>Another approach we could take is to not make any real assumptions about the shape of the distribution and take a <strong>non-parametric</strong> approach. We will use the <code>median</code> (50th centile value) and <code>inter-quartile range</code> (75th centile (Q3) - 25th centile (Q1)) based on the to define outliers and remove them. We can used the `IQR() function to perform the calculate the inter-quartile range for us). Specifically, we will remove values if:</p>
 <p><span class="math inline">\(weight &lt; median - 1.5IQR\)</span></p>
 <p>or</p>
