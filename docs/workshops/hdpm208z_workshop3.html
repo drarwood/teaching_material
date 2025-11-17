@@ -145,42 +145,43 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#aims-of-workshop" id="toc-aims-of-workshop" class="nav-link" data-scroll-target="#aims-of-workshop"><span class="header-section-number">2</span> Aims of workshop</a></li>
   <li><a href="#conda-environment" id="toc-conda-environment" class="nav-link" data-scroll-target="#conda-environment"><span class="header-section-number">3</span> Conda environment</a></li>
-  <li><a href="#workshop-data" id="toc-workshop-data" class="nav-link" data-scroll-target="#workshop-data"><span class="header-section-number">4</span> Workshop data</a></li>
-  <li><a href="#load-required-r-libraries-for-workshop" id="toc-load-required-r-libraries-for-workshop" class="nav-link" data-scroll-target="#load-required-r-libraries-for-workshop"><span class="header-section-number">5</span> Load required R libraries for workshop</a></li>
-  <li><a href="#activity-1-data-wrangling" id="toc-activity-1-data-wrangling" class="nav-link" data-scroll-target="#activity-1-data-wrangling"><span class="header-section-number">6</span> Activity 1: Data Wrangling</a>
+  <li><a href="#workshop-directory" id="toc-workshop-directory" class="nav-link" data-scroll-target="#workshop-directory"><span class="header-section-number">4</span> Workshop directory</a></li>
+  <li><a href="#workshop-data" id="toc-workshop-data" class="nav-link" data-scroll-target="#workshop-data"><span class="header-section-number">5</span> Workshop data</a></li>
+  <li><a href="#load-required-r-libraries-for-workshop" id="toc-load-required-r-libraries-for-workshop" class="nav-link" data-scroll-target="#load-required-r-libraries-for-workshop"><span class="header-section-number">6</span> Load required R libraries for workshop</a></li>
+  <li><a href="#activity-1-data-wrangling" id="toc-activity-1-data-wrangling" class="nav-link" data-scroll-target="#activity-1-data-wrangling"><span class="header-section-number">7</span> Activity 1: Data Wrangling</a>
   <ul class="collapse">
-  <li><a href="#load-in-the-data" id="toc-load-in-the-data" class="nav-link" data-scroll-target="#load-in-the-data"><span class="header-section-number">6.1</span> Load in the data</a></li>
-  <li><a href="#remove-records-missing-a-date-none-or-numeric-value" id="toc-remove-records-missing-a-date-none-or-numeric-value" class="nav-link" data-scroll-target="#remove-records-missing-a-date-none-or-numeric-value"><span class="header-section-number">6.2</span> Remove records missing a date (=“None”) or numeric value</a>
+  <li><a href="#load-in-the-data" id="toc-load-in-the-data" class="nav-link" data-scroll-target="#load-in-the-data"><span class="header-section-number">7.1</span> Load in the data</a></li>
+  <li><a href="#remove-records-missing-a-date-none-or-numeric-value" id="toc-remove-records-missing-a-date-none-or-numeric-value" class="nav-link" data-scroll-target="#remove-records-missing-a-date-none-or-numeric-value"><span class="header-section-number">7.2</span> Remove records missing a date (=“None”) or numeric value</a>
   <ul class="collapse">
-  <li><a href="#convert-columns-to-character-type" id="toc-convert-columns-to-character-type" class="nav-link" data-scroll-target="#convert-columns-to-character-type"><span class="header-section-number">6.2.1</span> Convert columns to character type</a></li>
-  <li><a href="#keep-records-with-one-numeric-value-0" id="toc-keep-records-with-one-numeric-value-0" class="nav-link" data-scroll-target="#keep-records-with-one-numeric-value-0"><span class="header-section-number">6.2.2</span> Keep records with one numeric value &gt; 0</a></li>
-  <li><a href="#check-rows-that-would-have-been-excluded" id="toc-check-rows-that-would-have-been-excluded" class="nav-link" data-scroll-target="#check-rows-that-would-have-been-excluded"><span class="header-section-number">6.2.3</span> Check rows that would have been excluded</a></li>
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">6.2.4</span> Question</a></li>
+  <li><a href="#convert-columns-to-character-type" id="toc-convert-columns-to-character-type" class="nav-link" data-scroll-target="#convert-columns-to-character-type"><span class="header-section-number">7.2.1</span> Convert columns to character type</a></li>
+  <li><a href="#keep-records-with-one-numeric-value-0" id="toc-keep-records-with-one-numeric-value-0" class="nav-link" data-scroll-target="#keep-records-with-one-numeric-value-0"><span class="header-section-number">7.2.2</span> Keep records with one numeric value &gt; 0</a></li>
+  <li><a href="#check-rows-that-would-have-been-excluded" id="toc-check-rows-that-would-have-been-excluded" class="nav-link" data-scroll-target="#check-rows-that-would-have-been-excluded"><span class="header-section-number">7.2.3</span> Check rows that would have been excluded</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">7.2.4</span> Question</a></li>
   </ul></li>
-  <li><a href="#format-the-data-so-numerical-values-are-in-one-column" id="toc-format-the-data-so-numerical-values-are-in-one-column" class="nav-link" data-scroll-target="#format-the-data-so-numerical-values-are-in-one-column"><span class="header-section-number">6.3</span> Format the data so numerical values are in one column</a></li>
-  <li><a href="#resolve-muliple-weight-records-on-same-date" id="toc-resolve-muliple-weight-records-on-same-date" class="nav-link" data-scroll-target="#resolve-muliple-weight-records-on-same-date"><span class="header-section-number">6.4</span> Resolve muliple weight records on same date</a></li>
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">6.5</span> Question</a></li>
+  <li><a href="#format-the-data-so-numerical-values-are-in-one-column" id="toc-format-the-data-so-numerical-values-are-in-one-column" class="nav-link" data-scroll-target="#format-the-data-so-numerical-values-are-in-one-column"><span class="header-section-number">7.3</span> Format the data so numerical values are in one column</a></li>
+  <li><a href="#resolve-muliple-weight-records-on-same-date" id="toc-resolve-muliple-weight-records-on-same-date" class="nav-link" data-scroll-target="#resolve-muliple-weight-records-on-same-date"><span class="header-section-number">7.4</span> Resolve muliple weight records on same date</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">7.5</span> Question</a></li>
   </ul></li>
-  <li><a href="#activity-2-quality-control" id="toc-activity-2-quality-control" class="nav-link" data-scroll-target="#activity-2-quality-control"><span class="header-section-number">7</span> Activity 2: Quality Control</a>
+  <li><a href="#activity-2-quality-control" id="toc-activity-2-quality-control" class="nav-link" data-scroll-target="#activity-2-quality-control"><span class="header-section-number">8</span> Activity 2: Quality Control</a>
   <ul class="collapse">
-  <li><a href="#visualising-the-data" id="toc-visualising-the-data" class="nav-link" data-scroll-target="#visualising-the-data"><span class="header-section-number">7.1</span> Visualising the data</a></li>
-  <li><a href="#summarizing-the-data" id="toc-summarizing-the-data" class="nav-link" data-scroll-target="#summarizing-the-data"><span class="header-section-number">7.2</span> Summarizing the data</a></li>
-  <li><a href="#adding-in-additional-variables-to-assist-qc" id="toc-adding-in-additional-variables-to-assist-qc" class="nav-link" data-scroll-target="#adding-in-additional-variables-to-assist-qc"><span class="header-section-number">7.3</span> Adding in additional variables to assist QC</a></li>
-  <li><a href="#removing-outliers-of-remaining-weight-distribution" id="toc-removing-outliers-of-remaining-weight-distribution" class="nav-link" data-scroll-target="#removing-outliers-of-remaining-weight-distribution"><span class="header-section-number">7.4</span> Removing outliers of remaining weight distribution</a>
+  <li><a href="#visualising-the-data" id="toc-visualising-the-data" class="nav-link" data-scroll-target="#visualising-the-data"><span class="header-section-number">8.1</span> Visualising the data</a></li>
+  <li><a href="#summarizing-the-data" id="toc-summarizing-the-data" class="nav-link" data-scroll-target="#summarizing-the-data"><span class="header-section-number">8.2</span> Summarizing the data</a></li>
+  <li><a href="#adding-in-additional-variables-to-assist-qc" id="toc-adding-in-additional-variables-to-assist-qc" class="nav-link" data-scroll-target="#adding-in-additional-variables-to-assist-qc"><span class="header-section-number">8.3</span> Adding in additional variables to assist QC</a></li>
+  <li><a href="#removing-outliers-of-remaining-weight-distribution" id="toc-removing-outliers-of-remaining-weight-distribution" class="nav-link" data-scroll-target="#removing-outliers-of-remaining-weight-distribution"><span class="header-section-number">8.4</span> Removing outliers of remaining weight distribution</a>
   <ul class="collapse">
-  <li><a href="#parametric-approaches-to-removing-extremeoutlying-data-points" id="toc-parametric-approaches-to-removing-extremeoutlying-data-points" class="nav-link" data-scroll-target="#parametric-approaches-to-removing-extremeoutlying-data-points"><span class="header-section-number">7.4.1</span> Parametric approaches to removing extreme/outlying data points</a></li>
-  <li><a href="#non-parameter-approaches-to-outlying-data-points" id="toc-non-parameter-approaches-to-outlying-data-points" class="nav-link" data-scroll-target="#non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">7.4.2</span> Non-parameter approaches to outlying data points</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">7.4.3</span> Questions</a></li>
+  <li><a href="#parametric-approaches-to-removing-extremeoutlying-data-points" id="toc-parametric-approaches-to-removing-extremeoutlying-data-points" class="nav-link" data-scroll-target="#parametric-approaches-to-removing-extremeoutlying-data-points"><span class="header-section-number">8.4.1</span> Parametric approaches to removing extreme/outlying data points</a></li>
+  <li><a href="#non-parameter-approaches-to-outlying-data-points" id="toc-non-parameter-approaches-to-outlying-data-points" class="nav-link" data-scroll-target="#non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parameter approaches to outlying data points</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">8.4.3</span> Questions</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#activity-3-deriving-measures-of-weight-change" id="toc-activity-3-deriving-measures-of-weight-change" class="nav-link" data-scroll-target="#activity-3-deriving-measures-of-weight-change"><span class="header-section-number">8</span> Activity 3: Deriving measures of weight change</a>
+  <li><a href="#activity-3-deriving-measures-of-weight-change" id="toc-activity-3-deriving-measures-of-weight-change" class="nav-link" data-scroll-target="#activity-3-deriving-measures-of-weight-change"><span class="header-section-number">9</span> Activity 3: Deriving measures of weight change</a>
   <ul class="collapse">
-  <li><a href="#generate-variables-related-to-weight-variability" id="toc-generate-variables-related-to-weight-variability" class="nav-link" data-scroll-target="#generate-variables-related-to-weight-variability"><span class="header-section-number">8.1</span> Generate variable(s) related to weight variability</a></li>
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">8.2</span> Question</a></li>
+  <li><a href="#generate-variables-related-to-weight-variability" id="toc-generate-variables-related-to-weight-variability" class="nav-link" data-scroll-target="#generate-variables-related-to-weight-variability"><span class="header-section-number">9.1</span> Generate variable(s) related to weight variability</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">9.2</span> Question</a></li>
   </ul></li>
-  <li><a href="#activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" id="toc-activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" class="nav-link" data-scroll-target="#activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk"><span class="header-section-number">9</span> Activity 4: Testing for an association between weight change and type 2 diabetes risk</a>
+  <li><a href="#activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" id="toc-activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" class="nav-link" data-scroll-target="#activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk"><span class="header-section-number">10</span> Activity 4: Testing for an association between weight change and type 2 diabetes risk</a>
   <ul class="collapse">
-  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">9.1</span> Questions</a></li>
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1"><span class="header-section-number">10.1</span> Questions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,10 +213,21 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate hpdm208z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="workshop-data" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Workshop data</h1>
+<section id="workshop-directory" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Workshop directory</h1>
+<p>All relevant files associated with this workshops can be found in the following directory:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/ubuntu/hpdm208z/workshops/primary_care_data/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should navigate to this directory prior to starting the workshop. Note, a jupyter notebook can be be loaded from this directory to assist you in undertaking this workshop:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">primary_care_data.ipynb</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="workshop-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Workshop data</h1>
 <p>The data for this workshop containing data on 1,000 individuals has been provided in a form that represents that available in UK Biobank (but is NOT UK Biobank data). The file can be found here:</p>
-<p><code>/home/ubuntu/hpdm208z/workshops/disease_codes/weight_primary_care.txt</code></p>
+<p><code>/home/ubuntu/hpdm208z/workshops/primary_care_data/weight_primary_care.txt</code></p>
 <p>Within the dataset you will find the following variables:</p>
 <table class="caption-top table">
 <colgroup>
@@ -265,18 +277,18 @@ window.Quarto = {
 </table>
 <p><br> In this workshop, we will be focussing on weight (kg) for which the <code>read_v2</code> code and <code>read_v3</code> code is <code>22A..</code></p>
 </section>
-<section id="load-required-r-libraries-for-workshop" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Load required R libraries for workshop</h1>
+<section id="load-required-r-libraries-for-workshop" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Load required R libraries for workshop</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gridExtra))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(stringr))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gridExtra))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(stringr))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="activity-1-data-wrangling" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Activity 1: Data Wrangling</h1>
+<section id="activity-1-data-wrangling" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Activity 1: Data Wrangling</h1>
 <p>Your first task is to create a simplified tab-delimited file (with header) that looks like this:</p>
 <table class="table-striped table-hover caption-top table">
 <caption>Data format to generate</caption>
@@ -306,52 +318,52 @@ window.Quarto = {
 </tbody>
 </table>
 <p>We will create some some that will format the data and remove problematic records</p>
-<section id="load-in-the-data" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="load-in-the-data"><span class="header-section-number">6.1</span> Load in the data</h2>
+<section id="load-in-the-data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="load-in-the-data"><span class="header-section-number">7.1</span> Load in the data</h2>
 <p>Read in the data into a data frame called <code>gp_data</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gp_data<span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"weight_primary_care.txt"</span>, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">stringsAsFactors =</span> F, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">""</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gp_data<span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"weight_primary_care.txt"</span>, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">stringsAsFactors =</span> F, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">""</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="remove-records-missing-a-date-none-or-numeric-value" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="remove-records-missing-a-date-none-or-numeric-value"><span class="header-section-number">6.2</span> Remove records missing a date (=“None”) or numeric value</h2>
+<section id="remove-records-missing-a-date-none-or-numeric-value" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="remove-records-missing-a-date-none-or-numeric-value"><span class="header-section-number">7.2</span> Remove records missing a date (=“None”) or numeric value</h2>
 <p>We will later want to sort each individual by their date when deriving measures of variability so we should only consider records with a date.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use subset() function to remove records without a date</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gp_data <span class="ot">=</span> <span class="fu">subset</span>(gp_data, date <span class="sc">!=</span> <span class="st">"None"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># change column class type for date</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>date <span class="ot">=</span> <span class="fu">as.Date</span>(gp_data<span class="sc">$</span>date)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use subset() function to remove records without a date</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gp_data <span class="ot">=</span> <span class="fu">subset</span>(gp_data, date <span class="sc">!=</span> <span class="st">"None"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># change column class type for date</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>date <span class="ot">=</span> <span class="fu">as.Date</span>(gp_data<span class="sc">$</span>date)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="convert-columns-to-character-type" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="convert-columns-to-character-type"><span class="header-section-number">6.2.1</span> Convert columns to character type</h3>
+<section id="convert-columns-to-character-type" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="convert-columns-to-character-type"><span class="header-section-number">7.2.1</span> Convert columns to character type</h3>
 <p>This will make the next steps easier as we know from the outset the 3 columns are all of the character class</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val1 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val1)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val2 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val2)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val3 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val1 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val1)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val2 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val2)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gp_data<span class="sc">$</span>val3 <span class="ot">=</span> <span class="fu">as.character</span>(gp_data<span class="sc">$</span>val3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="keep-records-with-one-numeric-value-0" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="keep-records-with-one-numeric-value-0"><span class="header-section-number">6.2.2</span> Keep records with one numeric value &gt; 0</h3>
+<section id="keep-records-with-one-numeric-value-0" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="keep-records-with-one-numeric-value-0"><span class="header-section-number">7.2.2</span> Keep records with one numeric value &gt; 0</h3>
 <p>Let’s create a data frame called <code>gp_data_filtered</code> to hold all records with one numerical value &gt;0.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define which columns we will want to check for values &gt;0</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>val_cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"val1"</span>, <span class="st">"val2"</span>, <span class="st">"val3"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use dplyr to do this, applying filter to each row of the gp_records data frame</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>gp_data_filtered <span class="ot">=</span> gp_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>({</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to numerical values</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    vals <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">c_across</span>(<span class="fu">c</span>(val1, val2, val3)))) </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many numeric values are &gt; 0</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(vals <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">==</span> <span class="dv">1</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># applying the ungroup() function is good practice to remove any grouping of data</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define which columns we will want to check for values &gt;0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>val_cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"val1"</span>, <span class="st">"val2"</span>, <span class="st">"val3"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># use dplyr to do this, applying filter to each row of the gp_records data frame</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>gp_data_filtered <span class="ot">=</span> gp_data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>({</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to numerical values</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    vals <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">c_across</span>(<span class="fu">c</span>(val1, val2, val3)))) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many numeric values are &gt; 0</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(vals <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># applying the ungroup() function is good practice to remove any grouping of data</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gp_data_filtered,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gp_data_filtered,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 8
@@ -371,22 +383,22 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="check-rows-that-would-have-been-excluded" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="check-rows-that-would-have-been-excluded"><span class="header-section-number">6.2.3</span> Check rows that would have been excluded</h3>
+<section id="check-rows-that-would-have-been-excluded" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="check-rows-that-would-have-been-excluded"><span class="header-section-number">7.2.3</span> Check rows that would have been excluded</h3>
 <p>Let’s also check the behavior of the logic above is as expected for removing individuals by creating a data frame called <code>gp_data_excluded</code> to hold all excluded records.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gp_data_excluded <span class="ot">=</span> gp_data <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>({</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to numerical values</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    vals <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">c_across</span>(<span class="fu">c</span>(val1, val2, val3)))) </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many numeric values are &gt; 0</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(vals <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">1</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gp_data_excluded <span class="ot">=</span> gp_data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>({</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to numerical values</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    vals <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(<span class="fu">c_across</span>(<span class="fu">c</span>(val1, val2, val3)))) </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many numeric values are &gt; 0</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(vals <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">1</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gp_data_excluded,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gp_data_excluded,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 8
@@ -406,34 +418,34 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="question" class="level3" data-number="6.2.4">
-<h3 data-number="6.2.4" class="anchored" data-anchor-id="question"><span class="header-section-number">6.2.4</span> Question</h3>
+<section id="question" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="question"><span class="header-section-number">7.2.4</span> Question</h3>
 <ul>
 <li>Can you think of reasons why there may be more than one numerical weight value for some of records that were excluded?</li>
 </ul>
 </section>
 </section>
-<section id="format-the-data-so-numerical-values-are-in-one-column" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="format-the-data-so-numerical-values-are-in-one-column"><span class="header-section-number">6.3</span> Format the data so numerical values are in one column</h2>
+<section id="format-the-data-so-numerical-values-are-in-one-column" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="format-the-data-so-numerical-values-are-in-one-column"><span class="header-section-number">7.3</span> Format the data so numerical values are in one column</h2>
 <p>The next step is to create a variable that holds the numerical value &gt;0 found in either <code>var1</code>, <code>var2</code> or <code>var3</code> fields of the <code>gp_data_filtered</code> data frame. We will first convert the character fields to numeric so that any non-numeric values become <code>NA</code>. We will then use the <code>coalesce()</code> function which finds the first non-missing (numerical) value across the 3 fields. The <code>mutate()</code> function will allow us to create a new variable called <code>weight</code> in the data frame to store the value returned by the <code>coalesce()</code> function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns of val1, val2, val3 to numeric. Any non numerical values will be replaced with NA</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val1 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val1))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val2 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val2))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val3 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val3))</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a column that contains the numerical value from across the 3 variables</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We will simply use the coalesce function to find the first non-missing value across the variables</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>gp_data_filtered <span class="ot">&lt;-</span> gp_data_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fu">coalesce</span>(val1, val2, val3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns of val1, val2, val3 to numeric. Any non numerical values will be replaced with NA</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val1 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val1))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val2 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val2))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>gp_data_filtered<span class="sc">$</span>val3 <span class="ot">=</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(gp_data_filtered<span class="sc">$</span>val3))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a column that contains the numerical value from across the 3 variables</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We will simply use the coalesce function to find the first non-missing value across the variables</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>gp_data_filtered <span class="ot">&lt;-</span> gp_data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> <span class="fu">coalesce</span>(val1, val2, val3))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="resolve-muliple-weight-records-on-same-date" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="resolve-muliple-weight-records-on-same-date"><span class="header-section-number">6.4</span> Resolve muliple weight records on same date</h2>
+<section id="resolve-muliple-weight-records-on-same-date" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="resolve-muliple-weight-records-on-same-date"><span class="header-section-number">7.4</span> Resolve muliple weight records on same date</h2>
 <p>Multiple records associated with same read codes with assigned numerical values may appear on the same date. Values may be duplicated across such records or they may differ. We therefore need to resolve this.</p>
 <p>A quick look at just one of the individuals (id=500) shows that some records occur on the same date as others.</p>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">500</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">500</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
@@ -451,22 +463,22 @@ window.Quarto = {
 <p>We therefore need a strategy should we employ to resolve multiple records for the same variable on the same date.</p>
 <p>The approach we will take is to take the range (max value - min value) of numerical values assigned to weight and average the values if range &lt; 2. Otherwise, remove records associated with the date.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> gp_data_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id, date) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight_range =</span> <span class="fu">max</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_weight =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only groups where the range &lt; 2</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight_range <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only the columns you need</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, date, <span class="at">weight =</span> avg_weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> gp_data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id, date) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight_range =</span> <span class="fu">max</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_weight =</span> <span class="fu">mean</span>(weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only groups where the range &lt; 2</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight_range <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only the columns you need</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, date, <span class="at">weight =</span> avg_weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can look at specific examples to show that his has done what we have wanted.<br>
 Look at sample with id <code>96</code> and date <code>2013-02-21</code></p>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">96</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2013-02-21"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">96</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2013-02-21"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id provider       date read_2 read_3 val1 val2 val3 weight
@@ -476,19 +488,19 @@ Look at sample with id <code>96</code> and date <code>2013-02-21</code></p>
 </details>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(weight_data, id<span class="sc">==</span><span class="dv">96</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2013-02-21"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(weight_data, id<span class="sc">==</span><span class="dv">96</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2013-02-21"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id       date weight
 1 96 2013-02-21  102.5</code></pre>
 </div>
 </details>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rows removed from final data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rows removed from final data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check we have removed records we would expect as outside of range.<br>
 Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">38</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2007-06-27"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(gp_data_filtered, id<span class="sc">==</span><span class="dv">38</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2007-06-27"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id provider       date read_2 read_3 val1 val2 val3 weight
@@ -498,7 +510,7 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </details>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(weight_data, id<span class="sc">==</span><span class="dv">38</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2007-06-27"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">subset</span>(weight_data, id<span class="sc">==</span><span class="dv">38</span> <span class="sc">&amp;</span> date<span class="sc">==</span><span class="st">"2007-06-27"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] id     date   weight
@@ -507,56 +519,56 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </details>
 </div>
 </section>
-<section id="question-1" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="question-1"><span class="header-section-number">6.5</span> Question</h2>
+<section id="question-1" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="question-1"><span class="header-section-number">7.5</span> Question</h2>
 <ul>
 <li>Do you have any suggestions as to how this strategy could be improved?</li>
 </ul>
 <hr>
 </section>
 </section>
-<section id="activity-2-quality-control" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Activity 2: Quality Control</h1>
+<section id="activity-2-quality-control" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Activity 2: Quality Control</h1>
 <p>Although we have generated the <code>weight_data</code> dataframe from the primary care records, we still need to check whether the values for weight (kg) make sense. Even though this data is supposed to come from GP practices, mistakes are made on data entry.</p>
-<section id="visualising-the-data" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="visualising-the-data"><span class="header-section-number">7.1</span> Visualising the data</h2>
+<section id="visualising-the-data" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="visualising-the-data"><span class="header-section-number">8.1</span> Visualising the data</h2>
 <p>A helpful starting point is to visually examine the distribution of weight and check the values lie within ranges we would expect. If you are unsure what range to expect, it it useful to lookup a reference dataset to get an idea. For example, we could look at the distribution of weight measured in a reference dataset such as UK Biobank using their data showcase which provides the observed distribution of weight (kg) <a href="https://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=21002">here</a>. We can use this to get an idea of what we might expect assuming individuals in the reference dataset are representative of the individuals in our study. For example, based on UK Biobank, we wouldn’t necessarily expect an adult in our dataset to have weight measure of 10kg or be more than 200kg.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight)) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight)) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight)) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>These plots immediately inform is that we have some extreme outlying values that we need to remove.</p>
 </section>
-<section id="summarizing-the-data" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="summarizing-the-data"><span class="header-section-number">7.2</span> Summarizing the data</h2>
+<section id="summarizing-the-data" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="summarizing-the-data"><span class="header-section-number">8.2</span> Summarizing the data</h2>
 <p>Next we can summarize the data numerically</p>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
@@ -567,8 +579,8 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </details>
 </div>
 </section>
-<section id="adding-in-additional-variables-to-assist-qc" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="adding-in-additional-variables-to-assist-qc"><span class="header-section-number">7.3</span> Adding in additional variables to assist QC</h2>
+<section id="adding-in-additional-variables-to-assist-qc" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="adding-in-additional-variables-to-assist-qc"><span class="header-section-number">8.3</span> Adding in additional variables to assist QC</h2>
 <p>One reason why there may be excessive values &lt;50 could be because BMI has been entered instead of weight and assigned to the read-code for weight (<code>22A..</code>) instead of being assigned to the read-code for BMI (<code>22k..</code>). Data entry errors do occur and so we should check whether this is a potential cause.</p>
 <p>We will load in data on height, calculate the BMIs, and compare against a reference distribution. We will then filter BMI only on values &lt;50. Again, we will use the <a href="https://biobank.ctsu.ox.ac.uk/ukb/field.cgi?id=21001">UK Biobank showcase</a> to obtain an distribution of BMI from a subset of the general population of the UK. Based on this distribution, we will keep weight values if the corresponding BMI value is 15 &lt; BMI &lt; 50. Although there may be some real BMI values outside of this range, they will be extreme outliers. For the purposes of this analysis we will exclude weights associated with extreme BMI</p>
 <p>The formula for BMI is:</p>
@@ -578,91 +590,37 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <p><br></p>
 <p>In the workshop data provided, we have measures of height (cm) from which we can calulate BMI. You may assume the height data has already been QC’d.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in the height data</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>height_data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"height.txt"</span>, <span class="at">header=</span>T, <span class="at">stringsAsFactors =</span> F, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge to the weight_data DF</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">=</span> <span class="fu">merge</span>(weight_data, height_data, <span class="at">by=</span><span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load in the height data</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>height_data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"height.txt"</span>, <span class="at">header=</span>T, <span class="at">stringsAsFactors =</span> F, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge to the weight_data DF</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">=</span> <span class="fu">merge</span>(weight_data, height_data, <span class="at">by=</span><span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Calculate BMI, remembering that height is in centimeters and BMI uses meters squared as the denominator:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>bmi <span class="ot">=</span> weight_data<span class="sc">$</span>weight <span class="sc">/</span> (weight_data<span class="sc">$</span>height_cm <span class="sc">/</span> <span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>bmi <span class="ot">=</span> weight_data<span class="sc">$</span>weight <span class="sc">/</span> (weight_data<span class="sc">$</span>height_cm <span class="sc">/</span> <span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Lets first examine the distribution of BMI</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bmi)) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of BMI Values"</span>, <span class="at">x =</span> <span class="st">"BMI"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> </span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>bmi)) <span class="sc">+</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of BMI Values"</span>, <span class="at">x=</span><span class="st">""</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">=</span> </span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Weight against calculated BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Let’s keep individuals with 15 &lt; BMI &lt; 50 only</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc1 <span class="ot">=</span> <span class="fu">ifelse</span>(weight_data<span class="sc">$</span>bmi <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">|</span> weight_data<span class="sc">$</span>bmi <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Let’s check our histogram again</p>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bmi)) <span class="sc">+</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of weight values"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of BMI Values"</span>, <span class="at">x =</span> <span class="st">"BMI"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> </span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc1)) <span class="sc">+</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of QC'd weight valuesI"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>bmi)) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of BMI Values"</span>, <span class="at">x=</span><span class="st">""</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">=</span> </span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight)) <span class="sc">+</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of weight values"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Weight against calculated BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
 <span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">=</span> </span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight_qc1)) <span class="sc">+</span></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of QC'd weight values"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">=</span> </span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Weight against BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">=</span> </span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight_qc1, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"QC'd Weight against BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1088 rows containing non-finite outside the scale range (`stat_bin()`).</code></pre>
-</div>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -670,38 +628,92 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p3,p4,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s keep individuals with 15 &lt; BMI &lt; 50 only</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc1 <span class="ot">=</span> <span class="fu">ifelse</span>(weight_data<span class="sc">$</span>bmi <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">|</span> weight_data<span class="sc">$</span>bmi <span class="sc">&gt;</span> <span class="dv">50</span>, <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s check our histogram again</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of weight values"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc1)) <span class="sc">+</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hist. of QC'd weight valuesI"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">=</span> </span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight)) <span class="sc">+</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of weight values"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">=</span> </span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight_qc1)) <span class="sc">+</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of QC'd weight values"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">=</span> </span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Weight against BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">=</span> </span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span> </span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight_qc1, <span class="at">y=</span>bmi)) <span class="sc">+</span> </span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"QC'd Weight against BMI"</span>, <span class="at">x=</span><span class="st">"Weight"</span>, <span class="at">y =</span> <span class="st">"BMI"</span>)</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1088 rows containing non-finite outside the scale range (`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p3,p4,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1088 rows containing non-finite outside the scale range (`stat_boxplot()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p5,p6,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p5,p6,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1088 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc1,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc1,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc1,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc1,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc1, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc1,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc1,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc1,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc1,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc1, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_weight sd_weight min_weight max_weight median_weight
@@ -712,33 +724,33 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <p>We can see that the distribution of values &lt;50 has flattened out, most likely due to BMI measures being incorrectly entered. We can also see that weight measures that would result in extreme BMI values have also been filtered out.</p>
 <p>At this point we could accept the values that remain for subsequent analysis or we could perform additional QC - for example, a minimum value or 32 may seem unlikely but could be real. Ultimately, this decision, like others, are subjective that we hope lead to a sensible distribution - there is not a single “right” answer.</p>
 </section>
-<section id="removing-outliers-of-remaining-weight-distribution" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="removing-outliers-of-remaining-weight-distribution"><span class="header-section-number">7.4</span> Removing outliers of remaining weight distribution</h2>
+<section id="removing-outliers-of-remaining-weight-distribution" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="removing-outliers-of-remaining-weight-distribution"><span class="header-section-number">8.4</span> Removing outliers of remaining weight distribution</h2>
 <p>There are a number of ways in which we could remove outliers depending on the shape of the expected distribution of the variable. Arguably, there are two common approaches that are used for removing outliers from a distribution based on the distribution itself: <strong>parametric</strong> and <strong>non-parametric</strong> approaches.</p>
-<section id="parametric-approaches-to-removing-extremeoutlying-data-points" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="parametric-approaches-to-removing-extremeoutlying-data-points"><span class="header-section-number">7.4.1</span> Parametric approaches to removing extreme/outlying data points</h3>
+<section id="parametric-approaches-to-removing-extremeoutlying-data-points" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="parametric-approaches-to-removing-extremeoutlying-data-points"><span class="header-section-number">8.4.1</span> Parametric approaches to removing extreme/outlying data points</h3>
 <p>Parametric approaches assume we know something about the underlying distibution of the data and the parameters associated with the distribution. For example, we may note that the data follows a <strong>normal distribution</strong> (otherwise known as <strong>Gaussan distribution</strong>) for which the parameters will include the <strong>mean</strong> and <strong>standard deviation (SD)</strong> and the data symmetrically distributed around the mean.</p>
 <p>We could argue that most of the QC’d weight distribution looks “normal” with exception of some outlying values - so we may use a “parametric” approach to remove those outlying values. A common approach is to calculate the number of standard deviations from the mean a data point lies and remove data points further away than a set threshold. Common SD thresholds include <strong>&gt;|3|</strong> or <strong>&gt;|4|</strong> SDs. This choice is somewhat arbitary and depends on how inclusive we want to be.</p>
 <p>Note, the number of SDs a data point is away from the mean is referred to as it’s <strong>z-score</strong>. We can obtain the z-scores of a variable by using the <code>scale()</code> function in R. So, if we wanted to create a variable that removed weight values greater than 3 SDs either side of the mean, we could run the following code:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc2 <span class="ot">=</span> <span class="fu">ifelse</span>( <span class="fu">scale</span>(weight_data<span class="sc">$</span>weight_qc1) <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">3</span> <span class="sc">|</span> <span class="fu">scale</span>(weight_data<span class="sc">$</span>weight_qc1) <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight_qc1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc2 <span class="ot">=</span> <span class="fu">ifelse</span>( <span class="fu">scale</span>(weight_data<span class="sc">$</span>weight_qc1) <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">3</span> <span class="sc">|</span> <span class="fu">scale</span>(weight_data<span class="sc">$</span>weight_qc1) <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight_qc1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We could then plot the distributions again:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc2)) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> weight_qc2)) <span class="sc">+</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc2)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span> weight_qc2)) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1110 rows containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 </div>
@@ -748,20 +760,20 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc2,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc2,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc2,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc2,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc2, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc2,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc2,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc2,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc2,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc2, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_weight sd_weight min_weight max_weight median_weight
@@ -771,33 +783,33 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </div>
 <p>As a results, we have taken out some data points at the higher end of the distribution but have not removed any potential outliers at the bottom of the distribution (e.g.&nbsp;weight=32kg).</p>
 </section>
-<section id="non-parameter-approaches-to-outlying-data-points" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">7.4.2</span> Non-parameter approaches to outlying data points</h3>
+<section id="non-parameter-approaches-to-outlying-data-points" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="non-parameter-approaches-to-outlying-data-points"><span class="header-section-number">8.4.2</span> Non-parameter approaches to outlying data points</h3>
 <p>Another approach we could take is to not make any real assumptions about the shape of the distribution and take a <strong>non-parametric</strong> approach. We will use the <code>median</code> (50th centile value) and <code>inter-quartile range</code> (75th centile (Q3) - 25th centile (Q1)) based on the to define outliers and remove them. We can used the `IQR() function to perform the calculate the inter-quartile range for us). Specifically, we will remove values if:</p>
 <p><span class="math inline">\(weight &lt; median - 1.5IQR\)</span></p>
 <p>or</p>
 <p><span class="math inline">\(weight &gt; median + 1.5IQR\)</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc3 <span class="ot">=</span> <span class="fu">ifelse</span>( weight_data<span class="sc">$</span>weight_qc1 <span class="sc">&lt;</span> <span class="fu">median</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T) <span class="sc">-</span> (<span class="fl">1.5</span><span class="sc">*</span><span class="fu">IQR</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T)) <span class="sc">|</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                                   weight_data<span class="sc">$</span>weight_qc1 <span class="sc">&gt;</span> <span class="fu">median</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T) <span class="sc">+</span> (<span class="fl">1.5</span><span class="sc">*</span><span class="fu">IQR</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T)),  </span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight_qc1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>weight_data<span class="sc">$</span>weight_qc3 <span class="ot">=</span> <span class="fu">ifelse</span>( weight_data<span class="sc">$</span>weight_qc1 <span class="sc">&lt;</span> <span class="fu">median</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T) <span class="sc">-</span> (<span class="fl">1.5</span><span class="sc">*</span><span class="fu">IQR</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T)) <span class="sc">|</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                                   weight_data<span class="sc">$</span>weight_qc1 <span class="sc">&gt;</span> <span class="fu">median</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T) <span class="sc">+</span> (<span class="fl">1.5</span><span class="sc">*</span><span class="fu">IQR</span>(weight_data<span class="sc">$</span>weight_qc1, <span class="at">na.rm =</span> T)),  </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">NA</span>, weight_data<span class="sc">$</span>weight_qc1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We could then plot the distributions again:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc3)) <span class="sc">+</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight_qc3)) <span class="sc">+</span></span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight_qc3)) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Weight Values from Primary Care Data"</span>, <span class="at">x =</span> <span class="st">"Weight (KG)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>weight_data  <span class="sc">|&gt;</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>weight_qc3)) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Weight Values from Primary Care Data"</span>, <span class="at">y =</span> <span class="st">"Weight (KG)"</span>)</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1780 rows containing non-finite outside the scale range (`stat_bin()`).</code></pre>
 </div>
@@ -807,20 +819,20 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="hdpm208z_workshop3_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-output-fold="true" data-output-summary="View output">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc3,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc3,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc3,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc3,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc3, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_weight   =</span> <span class="fu">mean</span>(weight_qc3,   <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_weight     =</span> <span class="fu">sd</span>(weight_qc3,     <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_weight    =</span> <span class="fu">min</span>(weight_qc3,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_weight    =</span> <span class="fu">max</span>(weight_qc3,    <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_weight =</span> <span class="fu">median</span>(weight_qc3, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details><summary>View output</summary>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_weight sd_weight min_weight max_weight median_weight
@@ -829,8 +841,8 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </details>
 </div>
 </section>
-<section id="questions" class="level3" data-number="7.4.3">
-<h3 data-number="7.4.3" class="anchored" data-anchor-id="questions"><span class="header-section-number">7.4.3</span> Questions</h3>
+<section id="questions" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="questions"><span class="header-section-number">8.4.3</span> Questions</h3>
 <ul>
 <li>Do you notice any differences between using a parametric and non-parametric approach?</li>
 <li>Which approach would you take given the differences above and why?</li>
@@ -839,8 +851,8 @@ Look at sample with id <code>38</code> and date <code>2007-06-27</code></p>
 </section>
 </section>
 </section>
-<section id="activity-3-deriving-measures-of-weight-change" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Activity 3: Deriving measures of weight change</h1>
+<section id="activity-3-deriving-measures-of-weight-change" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Activity 3: Deriving measures of weight change</h1>
 <p>Now we have a QC’d version One health-related research question may be to look at the effects of weight change over time and how that might be associated with disease. Measures of <strong>within-individual</strong> variability commonly used in health-related research include standard deviation but also:</p>
 <p><strong>Coefficient of variation per individual</strong><br>
 This is the mean divided by the standard deviation of the data points. This is an alternative to using SD where the units become standardized, whereas SD values are directly related to the scale of the variable (e.g.&nbsp;kg).</p>
@@ -863,40 +875,40 @@ This is the average of the absolute difference between consecutive data points o
 <p>where<br>
 <span class="math inline">\(x_i\)</span> is a data point <span class="math inline">\(x\)</span> at time point <span class="math inline">\(i\)</span><br>
 <span class="math inline">\(n\)</span> is the number of data points</p>
-<section id="generate-variables-related-to-weight-variability" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="generate-variables-related-to-weight-variability"><span class="header-section-number">8.1</span> Generate variable(s) related to weight variability</h2>
+<section id="generate-variables-related-to-weight-variability" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="generate-variables-related-to-weight-variability"><span class="header-section-number">9.1</span> Generate variable(s) related to weight variability</h2>
 <p>Choose one or more variables from SD, coefficient of variation, or/and average successive variation and calculate for each individual. You should remove individuals with &lt;3 values prior to generating the new variable(s).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code to remove indivduals with &lt;3 values for weight</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Code to generate variable(s) associated with weight variability for each individual</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code to remove indivduals with &lt;3 values for weight</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Code to generate variable(s) associated with weight variability for each individual</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="question-2" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="question-2"><span class="header-section-number">8.2</span> Question</h2>
+<section id="question-2" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="question-2"><span class="header-section-number">9.2</span> Question</h2>
 <ul>
 <li>What limitations do you think there are for deriving weight variability in this way?</li>
 </ul>
 <hr>
 </section>
 </section>
-<section id="activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Activity 4: Testing for an association between weight change and type 2 diabetes risk</h1>
+<section id="activity-4-testing-for-an-association-between-weight-change-and-type-2-diabetes-risk" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Activity 4: Testing for an association between weight change and type 2 diabetes risk</h1>
 <p>One question we might ask is how changes in weight over time is associated with adverse health outcomes, such as disease.</p>
 <p>One of the biggest risk factors for type 2 diabetes is obesity yet less is known about how fluctuation in weight over time may be associated with the disease.</p>
 <p>You have been provided with a file named <code>t2d_status.txt</code>. Load this in, bind it to the data frame containing your estimate, and create a logistic model that tests for an association between your derived measure of weight variability.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data in</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>t2d_status <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"t2d_status.txt"</span>, <span class="at">stringsAsFactors =</span> F, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge to data frame with variability measures</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform logistic regression model</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data in</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>t2d_status <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"t2d_status.txt"</span>, <span class="at">stringsAsFactors =</span> F, <span class="at">header=</span>T, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge to data frame with variability measures</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform logistic regression model</span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="questions-1" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">9.1</span> Questions</h2>
+<section id="questions-1" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">10.1</span> Questions</h2>
 <ul>
 <li>Is there an association between weight variability and type 2 diabetes risk?</li>
 <li>What other predictors for type 2 diabetes might we want to additionally include in the model?</li>
