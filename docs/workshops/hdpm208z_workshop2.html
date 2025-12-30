@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" id="toc-on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" class="nav-link" data-scroll-target="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r"><span class="header-section-number">10.1</span> On the Linux command line, copy the <code>define_crc.r</code> script to a new script file called <code>define_crf.r</code></a></li>
   <li><a href="#update-the-define_crf.r-script" id="toc-update-the-define_crf.r-script" class="nav-link" data-scroll-target="#update-the-define_crf.r-script"><span class="header-section-number">10.2</span> Update the <code>define_crf.r</code> script</a></li>
   <li><a href="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" id="toc-compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" class="nav-link" data-scroll-target="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry"><span class="header-section-number">10.3</span> Compare number of cases and controls using HES, cancer registry, and death registry:</a></li>
-  <li><a href="#explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" id="toc-explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="nav-link" data-scroll-target="#explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of sex, bmi and smoking status on chronic renal failure</a></li>
+  <li><a href="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" id="toc-explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="nav-link" data-scroll-target="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</a></li>
   <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">10.5</span> Questions</a></li>
   </ul></li>
   </ul>
@@ -287,11 +287,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="uk-biobank-field-names" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="uk-biobank-field-names"><span class="header-section-number">5.1</span> UK Biobank field names</h2>
 <p>In addition, you will find the remaining columns labelled to mimic that of UK Biobank and follow a standard format:</p>
-<p><code>X_FIELD_VISIT_INSTANCE</code>.</p>
+<p><code>X_FIELD_VISIT/RELEASE_INSTANCE</code>.</p>
 <p>Where</p>
 <p><code>FIELD</code> represents the field name as would be found in the UK Biobank.<br>
-<code>VISIT</code> represents the n’th visit of the study partipant on which the data was recorded:<br>
-0=baseline, 1=first follow-up visit, 2=second follow-up visit.<br>
+<code>VISIT/RELEASE</code> represents the n’th visit of the study partipant on which the data was recorded:<br>
+0=baseline, 1=first follow-up visit, 2=second follow-up visit, or the n’th release of data (e.g.&nbsp;death registry).<br>
 <code>INSTANCE</code> represents the n’th value entered on the given visit associated with the field.</p>
 <p>Example:</p>
 <p><code>X_20002_0_9</code></p>
@@ -302,6 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>where a 9th value may been provided by a study participant (9);<br>
 (missing for individuals with &lt;9 codes could be assigned to the participant).</li>
 </ul>
+<p>Note, with the exception of data related to deaths, all variables in the workshops data set represent baseline measures.</p>
 <p>Fields in the dataset that are in this format are described below. Following the “Data-Coding” links within the UKB pages provides details of how specific codes map to health outcomes.</p>
 <table class="table-striped table-hover caption-top table">
 <caption>Variables with UKB naming conventions found in workshop data</caption>
@@ -391,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questions" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="questions"><span class="header-section-number">5.2</span> Questions</h2>
 <ul>
-<li>Do you think structuring data using multiple variables that allow for some multiple instances of disease codes is a good way to store the data?</li>
+<li>Do you think structuring data using multiple variables that allow for multiple instances of disease codes is a good way to store the data?</li>
 <li>What alternative formats might you consider?</li>
 </ul>
 <p><strong>Return to the module page to post your thoughts.</strong></p>
@@ -608,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Smoking status:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Place sex, BMI and smoking status as independent variables into a single multivariable logistic regression model</p>
+<p>Place age, sex, BMI and smoking status as independent variables into a single multivariable logistic regression model</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against all exposures above:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -652,9 +653,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of sex, bmi and smoking status on chronic renal failure</h2>
-<p>Perform logistic regression on the disease definition above with the highest number of cases to determine the effect of sex, bmi and smoking status separately (univariable logistic regression models) and together (multivariable logistic regression model)</p>
+<section id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</h2>
+<p>Perform logistic regression on the disease definition above with the highest number of cases to determine the effect of age, sex, bmi and smoking status separately (univariable logistic regression models) and together (multivariable logistic regression model)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert code to run models here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
