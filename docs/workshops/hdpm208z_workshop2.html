@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Prof.&nbsp;Andrew R Wood">
-<meta name="dcterms.date" content="2025-11-07">
+<meta name="dcterms.date" content="2025-12-30">
 
 <title>HPDM208Z Stratified Medicine Workshop 2: Defining disease status using health data</title>
 <style>
@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">2025-11-07</p>
+        <p class="date">2025-12-30</p>
       </div>
     </div>
     
@@ -137,8 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources" id="toc-cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources" class="nav-link" data-scroll-target="#cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources"><span class="header-section-number">8.1</span> Cross tabulate cases and controls from cancer registry with those derived from other data sources</a></li>
   <li><a href="#make-a-cleaner-colorectal-cancer-casecontrol-variable" id="toc-make-a-cleaner-colorectal-cancer-casecontrol-variable" class="nav-link" data-scroll-target="#make-a-cleaner-colorectal-cancer-casecontrol-variable"><span class="header-section-number">8.2</span> Make a cleaner colorectal cancer case/control variable</a></li>
-  <li><a href="#run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" id="toc-run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" class="nav-link" data-scroll-target="#run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls"><span class="header-section-number">8.3</span> Run regression model to test if age associated with risk using <code>ca_reg_crc2</code> to define cases and controls</a></li>
-  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">8.4</span> Questions</a></li>
+  <li><a href="#questions-3" id="toc-questions-3" class="nav-link" data-scroll-target="#questions-3"><span class="header-section-number">8.3</span> Questions</a></li>
   </ul></li>
   <li><a href="#activity-4-testing-other-risk-factors-against-cancer-risk" id="toc-activity-4-testing-other-risk-factors-against-cancer-risk" class="nav-link" data-scroll-target="#activity-4-testing-other-risk-factors-against-cancer-risk"><span class="header-section-number">9</span> Activity 4: Testing other risk factors against cancer risk</a>
   <ul class="collapse">
@@ -149,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" id="toc-on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" class="nav-link" data-scroll-target="#on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r"><span class="header-section-number">10.1</span> On the Linux command line, copy the <code>define_crc.r</code> script to a new script file called <code>define_crf.r</code></a></li>
   <li><a href="#update-the-define_crf.r-script" id="toc-update-the-define_crf.r-script" class="nav-link" data-scroll-target="#update-the-define_crf.r-script"><span class="header-section-number">10.2</span> Update the <code>define_crf.r</code> script</a></li>
   <li><a href="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" id="toc-compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" class="nav-link" data-scroll-target="#compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry"><span class="header-section-number">10.3</span> Compare number of cases and controls using HES, cancer registry, and death registry:</a></li>
-  <li><a href="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" id="toc-explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="nav-link" data-scroll-target="#explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</a></li>
+  <li><a href="#explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" id="toc-explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="nav-link" data-scroll-target="#explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of sex, bmi and smoking status on chronic renal failure</a></li>
   <li><a href="#questions-5" id="toc-questions-5" class="nav-link" data-scroll-target="#questions-5"><span class="header-section-number">10.5</span> Questions</a></li>
   </ul></li>
   </ul>
@@ -508,7 +507,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questions-1" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="questions-1"><span class="header-section-number">6.3</span> Questions</h2>
 <ul>
-<li>Do you notice andy difference in numbers?</li>
+<li>Do you notice any difference in numbers?</li>
 <li>If so, what do you think explains this?</li>
 </ul>
 <hr>
@@ -550,9 +549,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="7.2" class="anchored" data-anchor-id="questions-2"><span class="header-section-number">7.2</span> Questions</h2>
 <ul>
 <li>Overall, are the results consistent with each other and what do they tell us?</li>
-<li>Which colorectal cancer variable has the greatest estimated risk of colorectal cancer with each year increase in age?</li>
-<li>Which colorectal cancer variable has the smallest estimated risk of colorectal cancer with each year increase in age?</li>
-<li>What are the potential issues of using baseline age for these analyses?</li>
+<li>Which colorectal cancer variables have the smallest and largest estimated risk of colorectal cancer with each year increase in age?</li>
+<li>What are the issues of using baseline age as a predictor of colorectal cancer in these analyses?</li>
 </ul>
 <hr>
 </section>
@@ -566,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="8.1" class="anchored" data-anchor-id="cross-tabulate-cases-and-controls-from-cancer-registry-with-those-derived-from-other-data-sources"><span class="header-section-number">8.1</span> Cross tabulate cases and controls from cancer registry with those derived from other data sources</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross tablulate cancer registry data with HES:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(disease_codes<span class="sc">$</span>hes_diag_crc, ukb_data<span class="sc">$</span>ca_reg_crc)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(disease_codes<span class="sc">$</span>hes_diag_crc, disease_codes<span class="sc">$</span>ca_reg_crc)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross tablulate cancer registry data with death registry:</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
@@ -585,24 +583,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     recorded as having colorectal cancer in HES, death register or interview</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="run-regression-model-to-test-if-age-associated-with-risk-using-ca_reg_crc2-to-define-cases-and-controls"><span class="header-section-number">8.3</span> Run regression model to test if age associated with risk using <code>ca_reg_crc2</code> to define cases and controls</h2>
-<p>Check the association of age with risk of colorectal cancer for the new variable ca_reg_crc2. Also calculate the 95% confidence intervals as before:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Cases and controls defined by cancer registry and cleaned control set:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">glm</span>(ca_reg_crc2 <span class="sc">~</span> age, <span class="at">data=</span>disease_codes, <span class="at">family=</span>binomial))[[<span class="st">"coefficients"</span>]]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base OR      = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base L95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"age_base U95% CI = "</span>, <span class="fu">exp</span>(m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>m[<span class="dv">2</span>,<span class="dv">2</span>]), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="questions-3" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">8.4</span> Questions</h2>
+<section id="questions-3" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="questions-3"><span class="header-section-number">8.3</span> Questions</h2>
 <ul>
 <li>How many people have been excluded from the control group based on the criteria above?</li>
-<li>Have the results for the effect of age on colorectal cancer risk changed?</li>
 </ul>
 <hr>
 </section>
@@ -611,19 +595,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="9"><span class="header-section-number">9</span> Activity 4: Testing other risk factors against cancer risk</h1>
 <p>Modify the logistic regression models to examine the effect of sex, bmi, and smoking status on colorectal cancer risk <code>ca_reg_crc2</code>. Note: smoking is a categorical variable so ensure your model treats it as a “factor” (<code>0</code>=never; <code>1</code>=former; <code>2</code>=current).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against BMI:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Sex:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Smoking status:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against BMI:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Sex:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against Smoking status:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Place age, sex, BMI, smoking status as independent variables into a single multivariable logistic regression model</p>
+<p>Place sex, BMI and smoking status as independent variables into a single multivariable logistic regression model</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against all exposures above:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case status regressed against all exposures above:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="questions-4" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="questions-4"><span class="header-section-number">9.1</span> Questions</h2>
@@ -639,13 +623,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="on-the-linux-command-line-copy-the-define_crc.r-script-to-a-new-script-file-called-define_crf.r"><span class="header-section-number">10.1</span> On the Linux command line, copy the <code>define_crc.r</code> script to a new script file called <code>define_crf.r</code></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> define_crc.r define_crf.r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> define_crc.r define_crf.r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="update-the-define_crf.r-script" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="update-the-define_crf.r-script"><span class="header-section-number">10.2</span> Update the <code>define_crf.r</code> script</h2>
 <p><a href="https://doi.org/10.1371/journal.pgen.1008405.s001">Supplementary Table B</a> of <a href="https://doi.org/10.1371/journal.pgen.1008405">Censin et al.&nbsp;(2019)</a> provides disease outcomes and diagnosis codes used to define disease cases and controls.</p>
-<p>Use this table to create an updated R script to define cases for “Renal failure – chronic” based on ICD9 and ICD10 codes.</p>
+<p>Use this table to create an updated R script to define cases for “Renal failure – chronic” based on ICD9 and ICD10 codes. Then run the script:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"define_crf.r"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="compare-number-of-cases-and-controls-using-hes-cancer-registry-and-death-registry"><span class="header-section-number">10.3</span> Compare number of cases and controls using HES, cancer registry, and death registry:</h2>
@@ -654,12 +641,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate numbers of cases and controls based on cancer registry</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate numbers of cases and controls based on death registry</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># insert code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="explore-effects-of-age-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of age, sex, bmi and smoking status on chronic renal failure</h2>
-<p>Perform logistic regression on the disease definition above with the highest number of cases to determine the effect of age, sex, bmi and smoking status separately (univariable logistic regression models) and together (multivariable logistic regression model)</p>
+<section id="explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="explore-effects-of-sex-bmi-and-smoking-status-on-chronic-renal-failure"><span class="header-section-number">10.4</span> Explore effects of sex, bmi and smoking status on chronic renal failure</h2>
+<p>Perform logistic regression on the disease definition above with the highest number of cases to determine the effect of sex, bmi and smoking status separately (univariable logistic regression models) and together (multivariable logistic regression model)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert code to run models here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -667,7 +657,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="questions-5" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="questions-5"><span class="header-section-number">10.5</span> Questions</h2>
 <ul>
-<li>Do you notice any noticable changes to effect estimates of the independent variables between he univariable and multivariable?</li>
 <li>Is there an association with smoking status? If so, what alternative explanation could there be to this?</li>
 </ul>
 </section>
