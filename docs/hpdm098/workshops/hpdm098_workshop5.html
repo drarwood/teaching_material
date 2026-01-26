@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Andrew R Wood">
+<meta name="dcterms.date" content="2026-01-26">
+
+<title>HPDM098 Stratified Medicine Workshop 5: MySQL</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="hpdm098_workshop5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/popper.min.js"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hpdm098_workshop5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hpdm098_workshop5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hpdm098_workshop5_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hpdm098_workshop5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hpdm098_workshop5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hpdm098_workshop5_files/libs/bootstrap/bootstrap-d5214d16172734abcd1dcccc621ce81b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">HPDM098 Stratified Medicine Workshop 5: MySQL</h1>
+            <p class="subtitle lead">MSc Health Data Science, University of Exeter</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Prof.&nbsp;Andrew R Wood <a href="mailto:A.R.Wood@exeter.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">2026-01-26</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#aims-of-workshop" id="toc-aims-of-workshop" class="nav-link" data-scroll-target="#aims-of-workshop"><span class="header-section-number">2</span> Aims of workshop</a></li>
+  <li><a href="#conda-environment" id="toc-conda-environment" class="nav-link" data-scroll-target="#conda-environment"><span class="header-section-number">3</span> Conda environment</a></li>
+  <li><a href="#workshop-directory" id="toc-workshop-directory" class="nav-link" data-scroll-target="#workshop-directory"><span class="header-section-number">4</span> Workshop directory</a></li>
+  <li><a href="#workshop-data" id="toc-workshop-data" class="nav-link" data-scroll-target="#workshop-data"><span class="header-section-number">5</span> Workshop data</a></li>
+  <li><a href="#connecting-to-mysql" id="toc-connecting-to-mysql" class="nav-link" data-scroll-target="#connecting-to-mysql"><span class="header-section-number">6</span> Connecting to MySQL</a></li>
+  <li><a href="#exploring-mysql-databases-and-tables" id="toc-exploring-mysql-databases-and-tables" class="nav-link" data-scroll-target="#exploring-mysql-databases-and-tables"><span class="header-section-number">7</span> Exploring MySQL databases and tables</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">7.0.1</span> Questions</a></li>
+  </ul></li>
+  <li><a href="#basic-queries" id="toc-basic-queries" class="nav-link" data-scroll-target="#basic-queries"><span class="header-section-number">8</span> Basic Queries</a>
+  <ul class="collapse">
+  <li><a href="#returning-table-rows-select" id="toc-returning-table-rows-select" class="nav-link" data-scroll-target="#returning-table-rows-select"><span class="header-section-number">8.1</span> Returning table rows: <code>SELECT</code></a></li>
+  <li><a href="#filtering-table-rows-where" id="toc-filtering-table-rows-where" class="nav-link" data-scroll-target="#filtering-table-rows-where"><span class="header-section-number">8.2</span> Filtering table rows: <code>WHERE</code></a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks"><span class="header-section-number">8.3</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#joining-tables-together" id="toc-joining-tables-together" class="nav-link" data-scroll-target="#joining-tables-together"><span class="header-section-number">9</span> Joining tables together</a>
+  <ul class="collapse">
+  <li><a href="#inner-joins-and-aliases" id="toc-inner-joins-and-aliases" class="nav-link" data-scroll-target="#inner-joins-and-aliases"><span class="header-section-number">9.1</span> Inner joins (and aliases)</a></li>
+  <li><a href="#left-joins" id="toc-left-joins" class="nav-link" data-scroll-target="#left-joins"><span class="header-section-number">9.2</span> Left joins</a></li>
+  <li><a href="#right-joins" id="toc-right-joins" class="nav-link" data-scroll-target="#right-joins"><span class="header-section-number">9.3</span> Right joins</a></li>
+  <li><a href="#outer-joins" id="toc-outer-joins" class="nav-link" data-scroll-target="#outer-joins"><span class="header-section-number">9.4</span> Outer joins</a></li>
+  <li><a href="#tasks-1" id="toc-tasks-1" class="nav-link" data-scroll-target="#tasks-1"><span class="header-section-number">9.5</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#aggregate-functions" id="toc-aggregate-functions" class="nav-link" data-scroll-target="#aggregate-functions"><span class="header-section-number">10</span> Aggregate functions</a>
+  <ul class="collapse">
+  <li><a href="#removing-duplicates-distinct" id="toc-removing-duplicates-distinct" class="nav-link" data-scroll-target="#removing-duplicates-distinct"><span class="header-section-number">10.1</span> Removing duplicates: <code>DISTINCT</code></a></li>
+  <li><a href="#grouping-records-group-by" id="toc-grouping-records-group-by" class="nav-link" data-scroll-target="#grouping-records-group-by"><span class="header-section-number">10.2</span> Grouping records: <code>GROUP BY</code></a></li>
+  <li><a href="#filtering-based-on-group-by-having" id="toc-filtering-based-on-group-by-having" class="nav-link" data-scroll-target="#filtering-based-on-group-by-having"><span class="header-section-number">10.3</span> Filtering based on <code>GROUP BY</code>: <code>HAVING</code></a></li>
+  <li><a href="#numerical-aggregate-functions" id="toc-numerical-aggregate-functions" class="nav-link" data-scroll-target="#numerical-aggregate-functions"><span class="header-section-number">10.4</span> Numerical aggregate functions</a></li>
+  <li><a href="#tasks-2" id="toc-tasks-2" class="nav-link" data-scroll-target="#tasks-2"><span class="header-section-number">10.5</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#nested-queries" id="toc-nested-queries" class="nav-link" data-scroll-target="#nested-queries"><span class="header-section-number">11</span> Nested queries</a>
+  <ul class="collapse">
+  <li><a href="#from-having-back-to-where" id="toc-from-having-back-to-where" class="nav-link" data-scroll-target="#from-having-back-to-where"><span class="header-section-number">11.1</span> From <code>HAVING</code> back to <code>WHERE</code></a></li>
+  <li><a href="#accessing-field-aliases" id="toc-accessing-field-aliases" class="nav-link" data-scroll-target="#accessing-field-aliases"><span class="header-section-number">11.2</span> Accessing field aliases</a></li>
+  </ul></li>
+  <li><a href="#views" id="toc-views" class="nav-link" data-scroll-target="#views"><span class="header-section-number">12</span> Views</a></li>
+  <li><a href="#exporting-mysql-data-to-file" id="toc-exporting-mysql-data-to-file" class="nav-link" data-scroll-target="#exporting-mysql-data-to-file"><span class="header-section-number">13</span> Exporting MySQL data to file</a>
+  <ul class="collapse">
+  <li><a href="#tasks-3" id="toc-tasks-3" class="nav-link" data-scroll-target="#tasks-3"><span class="header-section-number">13.1</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#creating-and-populating-tables" id="toc-creating-and-populating-tables" class="nav-link" data-scroll-target="#creating-and-populating-tables"><span class="header-section-number">14</span> Creating and populating tables</a>
+  <ul class="collapse">
+  <li><a href="#import-nulls" id="toc-import-nulls" class="nav-link" data-scroll-target="#import-nulls"><span class="header-section-number">14.1</span> Importing data into a table from file</a></li>
+  <li><a href="#clearing-and-deleting-tables" id="toc-clearing-and-deleting-tables" class="nav-link" data-scroll-target="#clearing-and-deleting-tables"><span class="header-section-number">14.2</span> Clearing and deleting tables</a></li>
+  <li><a href="#manually-inserting-records-into-a-table" id="toc-manually-inserting-records-into-a-table" class="nav-link" data-scroll-target="#manually-inserting-records-into-a-table"><span class="header-section-number">14.3</span> Manually inserting records into a Table</a></li>
+  </ul></li>
+  <li><a href="#data-updates" id="toc-data-updates" class="nav-link" data-scroll-target="#data-updates"><span class="header-section-number">15</span> Data updates</a>
+  <ul class="collapse">
+  <li><a href="#tasks-4" id="toc-tasks-4" class="nav-link" data-scroll-target="#tasks-4"><span class="header-section-number">15.1</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#ensuring-referential-integrity" id="toc-ensuring-referential-integrity" class="nav-link" data-scroll-target="#ensuring-referential-integrity"><span class="header-section-number">16</span> Ensuring Referential Integrity</a>
+  <ul class="collapse">
+  <li><a href="#tasks-5" id="toc-tasks-5" class="nav-link" data-scroll-target="#tasks-5"><span class="header-section-number">16.1</span> Tasks</a></li>
+  </ul></li>
+  <li><a href="#connecting-to-mysql-through-python-and-r" id="toc-connecting-to-mysql-through-python-and-r" class="nav-link" data-scroll-target="#connecting-to-mysql-through-python-and-r"><span class="header-section-number">17</span> Connecting to MySQL through Python and R</a>
+  <ul class="collapse">
+  <li><a href="#connecting-to-mysql-through-python" id="toc-connecting-to-mysql-through-python" class="nav-link" data-scroll-target="#connecting-to-mysql-through-python"><span class="header-section-number">17.1</span> Connecting to MySQL through Python</a></li>
+  <li><a href="#connecting-to-mysql-through-r" id="toc-connecting-to-mysql-through-r" class="nav-link" data-scroll-target="#connecting-to-mysql-through-r"><span class="header-section-number">17.2</span> Connecting to MySQL through R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>In this workshop, you will learn how the fundamentals of MySQL.</p>
+</section>
+<section id="aims-of-workshop" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Aims of workshop</h1>
+<ul>
+<li>Learn how to connect to a MySQL server on the Linux command line</li>
+<li>Know how to explore MySQL databases and tables</li>
+<li>Practice writing basic queries to select rows of tables</li>
+<li>Understand how to join tables together</li>
+<li>Practice the use of aggregate functions</li>
+<li>Formulate nested queries</li>
+<li>Understand the purpose of views and how to create them</li>
+<li>Known how to export and import data from MySQL tables</li>
+<li>Learn how to Create tables</li>
+<li>Use MySQL queries to modify data</li>
+<li>Understand the steps required to ensure referential integrity</li>
+<li>Connect to MySQL through Python</li>
+<li>Connect to MySQL through R</li>
+</ul>
+</section>
+<section id="conda-environment" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Conda environment</h1>
+<p>Before attempting this workshop, you should deactivate all conda environments prior to attempting to access the MySQL server:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="workshop-directory" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Workshop directory</h1>
+<p>All relevant files associated with this workshops can be found in the following directory:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/ubuntu/hpdm098/workshops/mysql/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should navigate to this directory prior to starting the workshop.</p>
+</section>
+<section id="workshop-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Workshop data</h1>
+<p>Below is a table describing the data files in the workshops directory:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>study_baseline.txt</code></td>
+<td>Contains data associated with patients collected at study baseline</td>
+</tr>
+<tr class="even">
+<td><code>cancer_registry_icd10</code></td>
+<td>Contains data associated with patients in the ICD10-based cancer registry</td>
+</tr>
+<tr class="odd">
+<td><code>MySQL_Python_Connection.ipynb</code></td>
+<td>Jupyter notebook containing Python code to connect to MySQL</td>
+</tr>
+<tr class="even">
+<td><code>MySQL_R_Connection.ipynb</code></td>
+<td>Jupyter notebook containing R code to connect to MySQL</td>
+</tr>
+</tbody>
+</table>
+<p>You will not need these files until later in the workshop.</p>
+<p>Note, the online MySQL manual can be found <a href="https://dev.mysql.com/doc/refman/8.4/en/">here</a>.</p>
+<hr>
+</section>
+<section id="connecting-to-mysql" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Connecting to MySQL</h1>
+<p>A MySQL server has been installed and is running on your virtual machine. To login type the following command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">mysql</span> <span class="at">-u</span> hds <span class="at">-p</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This tells mysql you want to access the MySQL server with the username <code>hds</code> and you will provide a password. When prompted, type the following password and press enter:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HDS2025</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you have successfully logged in to the MySQL server, you should see something similar to the following:</p>
+<pre><code>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 33
+Server version: 8.0.44-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt;</code></pre>
+<p>For most of the workshop, we will write queries using the MySQL prompt on the command line. You should execute the queries provided in the workshop in addition to undertaking the tasks.</p>
+<hr>
+</section>
+<section id="exploring-mysql-databases-and-tables" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Exploring MySQL databases and tables</h1>
+<p>To use MySQL we need to select an existing database to use or create a new one. To view existing databases we can execute the following query by typing it and pressing enter:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    SHOW DATABASES;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note, that MySQL’s reserved words are not case sensitive so the following would also work:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    show databases;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>All queries are terminated by <code>;</code> If you press enter without a semicolon, the cursor you will simply be placed onto a new line where a query can continue to be written.</p>
+<p>After executing the query you should see something similar to following in the console:</p>
+<pre><code>mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| assessment1        |
+| information_schema |
+| mysql              |
+| mytest             |
+| performance_schema |
+| sys                |
+| workshop           |
++--------------------+
+7 rows in set (0.00 sec)</code></pre>
+<p>For the purposes of this workshop, we are going to use the <code>workshop</code> database (also known as a <code>schema</code>) so we will tell MySQL that’s what we want to do:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">USE</span> workshop;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we have selected the <code>workshop</code> database, we can view the collection of tables within it:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    SHOW <span class="kw">TABLES</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The query above should result in the following being displayed in the console:</p>
+<pre><code>mysql&gt; show tables;
++-----------------------+
+| Tables_in_workshop    |
++-----------------------+
+| cancer_registry_icd10 |
+| cancer_registry_icd9  |
+| death_registry_icd10  |
+| icd10_codes           |
+| icd9_codes            |
+| smoking_codes         |
+| study_patients        |
++-----------------------+
+7 rows in set (0.01 sec)</code></pre>
+<p>Use the <code>DESC[RIBE]</code> or <code>SHOW COLUMNS FROM</code> syntax to obtain details about each of the tables. For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    DESCRIBE study_patients;</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    SHOW <span class="kw">COLUMNS</span> <span class="kw">FROM</span> study_patients;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The output from either of the above queries return a table detailing the data tables:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Field</code></td>
+<td>Name of the field (column) in the MySQL table</td>
+</tr>
+<tr class="even">
+<td><code>Type</code></td>
+<td>The field’s <a href="https://dev.mysql.com/doc/refman/8.5/en/data-types.html">data type</a></td>
+</tr>
+<tr class="odd">
+<td><code>Null</code></td>
+<td>Whether the column can contain empty values <code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>Key</code></td>
+<td>Whether the field is a key</td>
+</tr>
+<tr class="odd">
+<td><code>Default</code></td>
+<td>The default value if not otherwise set</td>
+</tr>
+<tr class="even">
+<td><code>Extra</code></td>
+<td>Additional information about the field e.g.&nbsp;if <code>auto_increment</code> set when new record added</td>
+</tr>
+</tbody>
+</table>
+<section id="questions" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="questions"><span class="header-section-number">7.0.1</span> Questions</h3>
+<ul>
+<li>What is the difference between <code>char()</code> and <code>varchar()</code> ?</li>
+<li>What is the difference between <code>PRI</code>, <code>UNI</code>, <code>MUL</code> values that can appear in the field?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="basic-queries" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Basic Queries</h1>
+<p>In this section, we will explore using MySQL to query tables in the database for the purposes of returning and filtering records.</p>
+<section id="returning-table-rows-select" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="returning-table-rows-select"><span class="header-section-number">8.1</span> Returning table rows: <code>SELECT</code></h2>
+<p>The simplest SELECT query returns all the rows in a single table. Run the following command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> smoking_codes;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The SELECT statement is made up of four parts:</p>
+<ol type="1">
+<li>The keyword <code>SELECT</code></li>
+<li>The columns to be displayed. We used the <code>*</code> wildcard to tell MySQL to return all columns in the table</li>
+<li>The keyword <code>FROM</code></li>
+<li>The table name <code>smoking_codes</code></li>
+</ol>
+<p>This should have returned the following 4 rows:</p>
+<pre><code>mysql&gt; select * from smoking_codes;
++------+----------------------+
+| code | description          |
++------+----------------------+
+|   -3 | Prefer not to answer |
+|    0 | Never                |
+|    1 | Former               |
+|    2 | Current              |
++------+----------------------+
+4 rows in set (0.00 sec)
+</code></pre>
+<p>We will now try another <code>SELECT</code> query but selecting the specific columns <code>patient_id</code> and <code>bmi</code> from the <code>study_patients</code> table:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, bmi <span class="kw">FROM</span> study_patients;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Executing this query will return the values held in the <code>patient_id</code> and <code>bmi</code> for all 30,136 patients in the <code>study_patients</code> table. We might want to preview the data instead by adding the keyword <code>LIMIT</code> to the end of the query to return the first 10 patients instead:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, bmi <span class="kw">FROM</span> study_patients <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt; SELECT patient_id, bmi FROM study_patients LIMIT 10;
++------------+-------+
+| patient_id | bmi   |
++------------+-------+
+|          1 | 25.78 |
+|          2 | 27.77 |
+|          3 | 32.14 |
+|          4 |    23 |
+|          5 | 28.64 |
+|          6 | 31.29 |
+|          7 | 25.16 |
+|          8 | 32.17 |
+|          9 |  30.6 |
+|         10 |  30.8 |
++------------+-------+</code></pre>
+<p>It is worth noting that if we had not selected the <code>workshop</code> database at the beginning, we would need to add the database name prior to the table name, separated by <code>.</code> . For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, bmi <span class="kw">FROM</span> workshop.study_patients <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Sometimes we may want to skip the use of the <code>USE</code> query and just use the <code>DATABASE.TABLE</code> form as above. For example, we may want to joint tables from different databases (we will move onto joins shortly). For the remainder of this workshop however, we will not use the database name within queries and assume the <code>USE workshop;</code> query has been executed.</p>
+<p>Finally, we may also want to order the rows returned by BMI in either ascending or descending order. We can use <code>ORDER BY</code> to order rows by the specified field(s). Note, MySQL uses ascending order by default but this behaviour can be changed to descending order is required using <code>DESC</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, bmi <span class="kw">FROM</span> study_patients <span class="kw">ORDER</span> <span class="kw">BY</span> bmi <span class="kw">DESC</span> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt; SELECT patient_id, bmi FROM study_patients ORDER BY bmi DESC LIMIT 10;
++------------+-------+
+| patient_id | bmi   |
++------------+-------+
+|      19822 |  75.9 |
+|      25762 | 64.86 |
+|      27208 | 62.59 |
+|      24440 | 62.06 |
+|       4108 | 61.35 |
+|      15717 | 58.81 |
+|      24495 | 58.34 |
+|      19002 | 57.77 |
+|      15077 | 57.42 |
+|      17402 | 56.28 |
++------------+-------+
+10 rows in set (0.05 sec)</code></pre>
+<p>Note, you can order by mutliple fields using a combination of ascending and descending ordering. The following orders the <code>study_patients</code> table by sex (ascending) followed by bmi (descending) and returns the first 10 rows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, sex, bmi <span class="kw">FROM</span> study_patients <span class="kw">ORDER</span> <span class="kw">BY</span> sex, bmi <span class="kw">DESC</span> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt; SELECT patient_id, sex, bmi FROM study_patients ORDER BY sex, bmi DESC LIMIT 10;
++------------+--------+-------+
+| patient_id | sex    | bmi   |
++------------+--------+-------+
+|      19822 | Female |  75.9 |
+|      25762 | Female | 64.86 |
+|      27208 | Female | 62.59 |
+|      24440 | Female | 62.06 |
+|       4108 | Female | 61.35 |
+|      15717 | Female | 58.81 |
+|      24495 | Female | 58.34 |
+|      15077 | Female | 57.42 |
+|      17402 | Female | 56.28 |
+|      26506 | Female |  56.1 |
++------------+--------+-------+
+10 rows in set (0.04 sec)</code></pre>
+</section>
+<section id="filtering-table-rows-where" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="filtering-table-rows-where"><span class="header-section-number">8.2</span> Filtering table rows: <code>WHERE</code></h2>
+<p>The <code>WHERE</code> statement enables you to filter records based on conditional statements. For example, <code>WHERE</code> may be used to filter on 1) complete or partial string matches, 2) values less than, equal to, or greater than a specified numeric value, or 3) to dates/times earlier or later than a specific date. A table of some comparison operators can be found below with more details <a href="https://dev.mysql.com/doc/refman/8.4/en/comparison-operators.html">here</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comparison</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x = y</code></td>
+<td>Find records where values in field x match y</td>
+</tr>
+<tr class="even">
+<td><code>x != y</code> , <code>x &lt;&gt; y</code></td>
+<td>Find records where values in field x do not match y</td>
+</tr>
+<tr class="odd">
+<td><code>x &lt; y</code></td>
+<td>Find records where values in field x are less than y</td>
+</tr>
+<tr class="even">
+<td><code>x &gt; y</code></td>
+<td>Find records where values in field x are less than y</td>
+</tr>
+<tr class="odd">
+<td><code>x &lt;= y</code></td>
+<td>Find records where values in field x are less than or greater than y</td>
+</tr>
+<tr class="even">
+<td><code>x &gt;= y</code></td>
+<td>Find records where values in field x are more than or greater than y</td>
+</tr>
+<tr class="odd">
+<td><code>x IS NULL</code></td>
+<td>Find records where values in field x are empty</td>
+</tr>
+<tr class="even">
+<td><code>x IS NOT NULL</code></td>
+<td>Find records where values in field x are not empty</td>
+</tr>
+<tr class="odd">
+<td><code>x LIKE %y%</code></td>
+<td>Find records where strings in field x partially match y</td>
+</tr>
+<tr class="even">
+<td><code>x LIKE y%</code></td>
+<td>Find records where strings in field x partially match y at the start</td>
+</tr>
+<tr class="odd">
+<td><code>x LIKE %y</code></td>
+<td>Find records where strings in field x partially match y at the end</td>
+</tr>
+</tbody>
+</table>
+<p>Note, if comparing values in a date field with a specific date explicitly specified in a <code>WHERE</code> clause, you should enclose the specific date with <code>'</code> and ensure the correct format for the <code>DATE</code> data type (i.e.&nbsp;<code>YYYY-MM-DD</code>)</p>
+<p>Conditional statements may be combined using logical operators:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Logical operators</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>AND</code> , <code>&amp;&amp;</code></td>
+<td>logical AND</td>
+</tr>
+<tr class="even">
+<td><code>OR</code> , <code>||</code></td>
+<td>logical OR</td>
+</tr>
+<tr class="odd">
+<td><code>XOR</code></td>
+<td>logical XOR</td>
+</tr>
+</tbody>
+</table>
+<p>For example, to return male patients with a BMI less than 15 from from the , we could use:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients <span class="kw">WHERE</span> bmi<span class="op">&lt;</span><span class="dv">15</span> <span class="kw">AND</span> sex <span class="op">=</span> <span class="ot">"Male"</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt; SELECT * FROM study_patients WHERE bmi&lt;15 AND sex = "Male";
++------------+------------+------+------------------+-------+----------------+
+| patient_id | dob        | sex  | date_recruitment | bmi   | smoking_status |
++------------+------------+------+------------------+-------+----------------+
+|      22183 | 1941-08-23 | Male | 2006-05-27       | 14.32 |              2 |
++------------+------------+------+------------------+-------+----------------+
+1 row in set (0.05 sec)</code></pre>
+</section>
+<section id="tasks" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="tasks"><span class="header-section-number">8.3</span> Tasks</h2>
+<p>Using the <code>study_patients</code> table:</p>
+<ul>
+<li>Write a query that returns all patients who are Male</li>
+<li>Write a query that returns all patients who are Female and have a BMI greater or equal to 30</li>
+<li>Write a query that returns the first 20 records with <code>patient_id</code> and <code>bmi</code>, ordered by BMI in ascending order but without <code>NULL</code> BMI values</li>
+<li>Write a query that returns all patients who are born after 1st January 1970</li>
+<li>Write a query that returns the oldest 10 patients who were &gt;40 years of age at study recruitment. You should also print their age in years to 2 d.p. Use the online MySQL documentation to lookup and use the <a href="https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html"><code>DATEDIFF()</code></a> and <a href="https://dev.mysql.com/doc/refman/8.4/en/mathematical-functions.html"><code>ROUND()</code></a> functions.</li>
+</ul>
+<p>Using the <code>icd10_codes</code> and <code>icd9_codes</code> tables:</p>
+<ul>
+<li>Compare the descriptions and counts for codes with in the description between ICD9 and ICD10 definitions.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="joining-tables-together" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Joining tables together</h1>
+<p>So far we have used MySQL to query data from one table. However, we often need to bring tables that contain related information together. If you are experienced in languages like R or Python (Pandas), you are likely to have done this using some form of <code>merge</code> function. In MySQL, the key word is <code>JOIN</code>.</p>
+<section id="inner-joins-and-aliases" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="inner-joins-and-aliases"><span class="header-section-number">9.1</span> Inner joins (and aliases)</h2>
+<p>If we wanted to return the study data for all recruited patients who have died, we can use an <strong>inner join</strong> to obtain the intersection of patients across the <code>study_patients</code> and <code>death_registry_icd10</code> tables:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">INNER</span> <span class="kw">JOIN</span> death_registry_icd10 </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> study_patients.patient_id <span class="op">=</span> death_registry_icd10.patient_id</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Joining between two tables requires 2 elements:</p>
+<ul>
+<li>The two table names</li>
+<li>The field in which to join the two tables <code>ON</code></li>
+</ul>
+<p>Unlike other joins, MySQL does not explicitly need the keyword <code>INNER</code> when performing an inner join. The following query would produce the same result:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> death_registry_icd10 </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> study_patients.patient_id <span class="op">=</span> death_registry_icd10.patient_id</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To make the above query easier and quicker to write, we will introduce table <strong>aliases</strong>. A table alias is simply an alternative label we can give to a table for the purposes of convenience. For the query above, we will assigned the table alias <code>a</code> to <code>study_patients</code> and table alias <code>b</code> to <code>death_registry_icd10</code>. An alias is defined by specifying it after a table name. Here is the above query with table aliases introduced:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients a</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> death_registry_icd10 b</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>It’s also worth noting that you can create aliases for columns if you decided you wanted to change the column name for the duration of the query. For example, if we just wanted to return the fields <code>patient_id</code> and <code>dob</code> renamed as <code>date_of_birth</code> based on the inner join query above, we can use the <code>AS</code> keyword in our query:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> a.patient_id, dob <span class="kw">AS</span> date_of_birth <span class="kw">FROM</span> study_patients a</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> death_registry_icd10 b</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note, field aliases can not be used in <code>WHERE</code> clauses. In the above example, we would have to use <code>dob</code> if data of birth was to form part of a <code>WHERE</code> clause.</p>
+<p>Also note, in the above example we had to provide a table alias <code>a</code> for <code>patient_id</code> as part of the select query. This is because we are joining two tables where the field name exists in both tables and if we are explicitly listing fields to return, MySQL needs to know which of the two tables to extract the field from.</p>
+</section>
+<section id="left-joins" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="left-joins"><span class="header-section-number">9.2</span> Left joins</h2>
+<p>While an inner join will return the intersection between two tables, a <strong>left join</strong> will always return the rows of the table on the left-hand side of the <code>ON</code> clause, returning either the joining rows of the table on the right-hand side of the <code>ON</code> clause or, if a row can not be joined, a series of <code>NULL</code> values in the fields associated with the table on the right-hand side. For example, the following will return all rows in the <code>study_patients</code> table even if a study participant has not died:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients a</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LEFT</span> <span class="kw">JOIN</span> death_registry_icd10 b</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="right-joins" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="right-joins"><span class="header-section-number">9.3</span> Right joins</h2>
+<p>A <strong>right join</strong> is similar to a left join, except the rules related to which rows are returned from which table are reversed - all rows from the table on the right of the <code>ON</code> clause will be returned, with <code>NULL</code> values for rows for the tables on the left-hand side if a row can not be joined:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients a</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">RIGHT</span> <span class="kw">JOIN</span> death_registry_icd10 b</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="outer-joins" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="outer-joins"><span class="header-section-number">9.4</span> Outer joins</h2>
+<p>An <strong>outer join</strong> returns all rows from both tables (so combining the results from the <code>INNER</code>, <code>LEFT</code> and <code>RIGHT</code> joins). However, there are no key words specific to performing such a join in MySQL. Therefore, we have to use a combination of <code>LEFT JOIN</code> and <code>RIGHT JOIN</code> combined with <code>UNION</code> to put the results together.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cancer_registry_icd10 a</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LEFT</span> <span class="kw">JOIN</span>  death_registry_icd10 b</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">UNION</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> cancer_registry_icd10 a</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">RIGHT</span> <span class="kw">JOIN</span>  death_registry_icd10 b</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>UNION</code> clause essentially stacks results from different queries on top of each other. It therefore requires the same number of columns to be returned from each query.</p>
+</section>
+<section id="tasks-1" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="tasks-1"><span class="header-section-number">9.5</span> Tasks</h2>
+<p>Write separate queries to count the number of study participants who</p>
+<ul>
+<li>reported their smoking status as or at baseline</li>
+<li>are in the cancer registry (ICD10) or death registry, but not both</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="aggregate-functions" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Aggregate functions</h1>
+<p>Aggregate functions are useful when wanting to gain a summary of a set of rows which may additionally be grouped based on some common features. Required summaries may include row counts, averages, earliest dates, minimum and maximum values, or unique values.</p>
+<section id="removing-duplicates-distinct" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="removing-duplicates-distinct"><span class="header-section-number">10.1</span> Removing duplicates: <code>DISTINCT</code></h2>
+<p>As the clause suggests, <code>DISTINCT</code> removes duplicates to the field(s) it is applied to. For example, if we execute the following query:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="fu">COUNT</span>(patient_id) <span class="kw">AS</span> row_count</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> cancer_registry_icd10;</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  # <span class="dv">20120</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This query tell us there are 20,120 rows in the table. However, if we wanted to know the number of patients that exist in the table then we could use the following query:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span>(patient_id)) <span class="kw">AS</span> patient_count</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> cancer_registry_icd10;</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  # <span class="dv">16388</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This query tells us there are 16,388 patients within the table. Given there are fewer patients than rows, it must mean some patients have more than one ICD10 code linked to cancer.</p>
+<p>Try running these queries again without the <code>AS</code> clause and compare the field heading returned.</p>
+</section>
+<section id="grouping-records-group-by" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="grouping-records-group-by"><span class="header-section-number">10.2</span> Grouping records: <code>GROUP BY</code></h2>
+<p>We may want to perform aggregate functions, such as count, min, max etc on a field having grouped the data by an entity. In the example, above, we may want to count the number of times an individual appears in the <code>cancer_registry_icd10</code> table.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(patient_id) <span class="kw">AS</span> icd10_count</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> cancer_registry_icd10</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">30</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>As we are applying <code>GROUP BY</code> to <code>patient_id</code>, we are taking care of the fact that multiple instances of a patient ID may be present in the table. In the query above, we have been explicit to help in understanding what the query is doing, but <code>COUNT(patient_id)</code> could be replaced by <code>COUNT(*)</code> and would return the same result.</p>
+</section>
+<section id="filtering-based-on-group-by-having" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="filtering-based-on-group-by-having"><span class="header-section-number">10.3</span> Filtering based on <code>GROUP BY</code>: <code>HAVING</code></h2>
+<p>After applying a <code>GROUP BY</code> function, we may want to filter on the results derived based on the aggregated rows, For example, we may only want to return the results from the above query where patients have <span class="math inline">\(\geq5\)</span> ICD10 cancer codes. The rules of MySQL mean we can not use a <code>WHERE</code> clause as before as we have applied an aggregated function, Instead, MySQL offers a <code>HAVING</code> clause as the replacement for <code>WHERE</code> (note there is a workaround to this by using nested queries which we shall encounter later.) Here is the extended query with the <code>HAVING</code> clause:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(patient_id) <span class="kw">AS</span> icd10_count</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> cancer_registry_icd10</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">5</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">30</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="numerical-aggregate-functions" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="numerical-aggregate-functions"><span class="header-section-number">10.4</span> Numerical aggregate functions</h2>
+<p>In addition to <code>COUNT</code>, other aggregate functions we can apply either on a whole table or grouped data include:</p>
+<ul>
+<li><code>MIN()</code> - returns the min value of the field specified</li>
+<li><code>MAX()</code> - returns the max value of the field specified<br>
+</li>
+<li><code>AVG()</code> - returns the mean value of the field specified<br>
+</li>
+<li><code>STD()</code> or <code>STDDEV()</code> - returns the standard deviation of the field specified<br>
+</li>
+<li><code>SUM()</code> - returns the summed values of the field specified</li>
+</ul>
+<p>More aggregate functions can be found <a href="https://dev.mysql.com/doc/refman/8.4/en/aggregate-functions.html">here</a>.</p>
+</section>
+<section id="tasks-2" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="tasks-2"><span class="header-section-number">10.5</span> Tasks</h2>
+<p>Write queries to determine</p>
+<ul>
+<li>the min, max, mean and SD of BMI in the <code>study_patients</code> table within sex</li>
+<li>same as (1) but only for patients with a recorded cancer (dead or alive)</li>
+<li>same as (1) but only for patients alive and without a cancer</li>
+<li>the minimum, maximum, mean and SD of BMI based on smoking status descriptions</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="nested-queries" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Nested queries</h1>
+<p>Nested queries provide a way to obtain information that may otherwise be difficult to retrieve using simple queries outlined above. As the name suggests, the enable you to place one query inside another.</p>
+<section id="from-having-back-to-where" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="from-having-back-to-where"><span class="header-section-number">11.1</span> From <code>HAVING</code> back to <code>WHERE</code></h2>
+<p>In the section above describing <code>GROUP BY</code>, we introduced the <code>HAVING</code> clause as a replacement for <code>WHERE</code> on aggregate functions. However, we can replace an aggregate function through nesting queriues to enable the use of <code>WHERE</code> again if we really wanted to. Here is the original query:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(patient_id) <span class="kw">AS</span> icd10_count</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> cancer_registry_icd10</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> patient_id</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here a query that will return the same results:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, icd10_count <span class="kw">FROM</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> patient_id, <span class="fu">COUNT</span>(patient_id) <span class="kw">AS</span> icd10_count</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> cancer_registry_icd10</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">GROUP</span> <span class="kw">BY</span> patient_id) a</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> icd10_count <span class="op">&gt;=</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that we have to provide an alias <code>a</code> for the subquery as we are essentially querying the results as if it formed a new table and this requires a label.</p>
+</section>
+<section id="accessing-field-aliases" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="accessing-field-aliases"><span class="header-section-number">11.2</span> Accessing field aliases</h2>
+<p>As shown in the above example, nested queries can also enable us to use field aliases in the WHERE clause. Here is another example of where we really might want to use field aliases to make things a bit easier to interpret where we are calculating and returning the age at recruitment and age of death of patients in the study who were <span class="math inline">\(\geq50\)</span> years old at study baseline and died <span class="math inline">\(\leq60\)</span> years of age:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> a.patient_id, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ROUND</span>(DATEDIFF(date_recruitment, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="kw">AS</span> age_at_recruitment,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ROUND</span>(DATEDIFF(date_of_death, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="kw">AS</span> age_at_death</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> study_patients a </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> death_registry_icd10 b </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> <span class="fu">ROUND</span>(DATEDIFF(date_recruitment, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="op">&gt;=</span> <span class="dv">50</span> <span class="kw">AND</span> </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">ROUND</span>(DATEDIFF(date_of_death, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="op">&lt;=</span> <span class="dv">60</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We could use a nested query to use the table aliases instead:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, age_at_recruitment, age_at_death <span class="kw">FROM</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">SELECT</span> a.patient_id,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ROUND</span>(DATEDIFF(date_recruitment, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="kw">AS</span> age_at_recruitment,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ROUND</span>(DATEDIFF(date_of_death, dob)<span class="op">/</span><span class="dv">365</span>, <span class="dv">2</span>) <span class="kw">AS</span> age_at_death</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>     <span class="kw">FROM</span> study_patients a</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>     <span class="kw">JOIN</span> death_registry_icd10 b </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>     <span class="kw">ON</span> a.patient_id <span class="op">=</span> b.patient_id) x</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> age_at_recruitment <span class="op">&gt;=</span> <span class="dv">50</span> <span class="kw">AND</span> age_at_death <span class="op">&lt;=</span> <span class="dv">60</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="views" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Views</h1>
+<p>Views are virtual tables that are not populated by imported data in the same way the tables that you have been working are, but return the results of queries. This can help avoid writing long complex queries by breaking queries down into manageable sections and querying the results held in the view.</p>
+<p>Views do not require any additional data storage in the same way creating a standard table based on results of query would (we will create new tables in a later section of this workshop). Views are updated with any changes to the underlying tables that form part of the query every time they are invoked and can be queried, For example, if we wanted to store the results of a query of patients that were recorded as Male and obese at baseline visit, we can write the following syntax:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">CREATE</span> <span class="kw">VIEW</span> study_patients_male_obese <span class="kw">AS</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> sex <span class="op">=</span> <span class="ot">"Male"</span> <span class="kw">and</span> bmi<span class="op">&gt;=</span><span class="dv">30</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can check the view has been created using:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>  SHOW <span class="kw">FULL</span> <span class="kw">TABLES</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt;  SHOW FULL TABLES;
++---------------------------+------------+
+| Tables_in_workshop        | Table_type |
++---------------------------+------------+
+| cancer_registry_icd10     | BASE TABLE |
+| cancer_registry_icd9      | BASE TABLE |
+| death_registry_icd10      | BASE TABLE |
+| icd10_codes               | BASE TABLE |
+| icd9_codes                | BASE TABLE |
+| smoking_codes             | BASE TABLE |
+| study_patients            | BASE TABLE |
+| study_patients_male_obese | VIEW       |
++---------------------------+------------+
+8 rows in set (0.01 sec)
+</code></pre>
+<p>We can subsequently query the results held in the view e.g.&nbsp;return obese males born in 1950 (limit first 10 rows) :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients_male_obese </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> dob <span class="op">&gt;=</span> <span class="st">'1950-01-01'</span> <span class="kw">AND</span> dob <span class="op">&lt;=</span> <span class="st">'1950-12-31'</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>mysql&gt; SELECT * FROM study_patients_male_obese 
+    -&gt;   WHERE dob &gt;= '1950-01-01' AND dob &lt;= '1950-12-31'
+    -&gt;   LIMIT 10;
++------------+------------+------+------------------+-------+----------------+
+| patient_id | dob        | sex  | date_recruitment | bmi   | smoking_status |
++------------+------------+------+------------------+-------+----------------+
+|          6 | 1950-08-07 | Male | 2007-04-15       | 31.29 |              0 |
+|         26 | 1950-02-03 | Male | 2010-01-05       | 34.96 |              1 |
+|        117 | 1950-01-28 | Male | 2011-04-30       | 34.96 |              0 |
+|        216 | 1950-05-09 | Male | 2011-07-23       | 30.74 |              0 |
+|        330 | 1950-12-04 | Male | 2010-11-14       |    39 |              0 |
+|        339 | 1950-02-09 | Male | 2006-05-06       |  37.5 |           NULL |
+|        475 | 1950-05-05 | Male | 2009-11-27       | 32.55 |              0 |
+|        641 | 1950-03-03 | Male | 2008-03-12       | 31.43 |              1 |
+|        889 | 1950-12-20 | Male | 2012-03-28       | 35.51 |              1 |
+|       1046 | 1950-07-20 | Male | 2006-09-12       | 35.15 |              0 |
++------------+------------+------+------------------+-------+----------------+
+10 rows in set (0.00 sec)</code></pre>
+<hr>
+</section>
+<section id="exporting-mysql-data-to-file" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Exporting MySQL data to file</h1>
+<p>Often, we may want to export data to a file on the system running the MySQL server. MySQL servers are often set up with strict file privileges whereby only certain users may read and/or write files. In addition, the locations in which MySQL can write files may be restricted. Your MySQL server has been setup so you can read and write files as user <code>hds</code> but MySQL will only accept queries for file reading and writing from the following directory:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">/var/lib/mysql-files</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You <strong>must</strong> move any files in or out of this directory if you want to upload into MySQL tables or retrieve after executing a MySQL export query, respectively.</p>
+<p>One of the most useful things to do with MySQL is to query the data and exportwhat we need to file prior to performing subsequent analysis. We can do this by using the <code>INTO OUTFILE</code> clause at the end of a query. For example, to extract the patient ID and BMI values for patients recorded as Female and output to a file called <code>study_patients_bmi_females_only.txt</code>, we would write the following:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> patient_id, bmi</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> study_patients</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> sex <span class="op">=</span> <span class="ot">"Female"</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INTO</span> OUTFILE <span class="ot">"/var/lib/mysql-files/study_patients_bmi_females_only.txt"</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should always give the full file path when exporting data from MySQL.</p>
+<section id="tasks-3" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="tasks-3"><span class="header-section-number">13.1</span> Tasks</h2>
+<ul>
+<li>Execute the query and then view the file using <code>less</code> or <code>more</code> in Linux.</li>
+<li>Update the query to add a header prior to exporting. Resolve any issues that arise in creating the same file again (either through MySQL or Linux).</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="creating-and-populating-tables" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Creating and populating tables</h1>
+<section id="import-nulls" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="import-nulls"><span class="header-section-number">14.1</span> Importing data into a table from file</h2>
+<p>Often, large structured data files obtained containing health data are inserted into database tables. We will upload the <code>study_baseline.txt</code> into a new table. This file contains the same data as found in the <code>study_patients</code> table. However, the <code>study_patients</code> table uses a <code>MyISAM</code> table engine. You are going to recreate the table but use the <code>InnoDB</code> table engine.</p>
+<p>First, we will copy the <code>study_baseline.txt</code> file into the <code>/var/lib/mysql-files</code> directory in Linux.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cp</span>  ~/hpdm098/workshops/mysql/study_baseline.txt  /var/lib/mysql-files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we will create a new table called in the <code>workshop</code> database.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> `study_patients_innodb` (</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  `patient_id` <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  `dob` <span class="dt">DATE</span> <span class="kw">NULL</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  `sex` <span class="dt">VARCHAR</span>(<span class="dv">6</span>) <span class="kw">NULL</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  `date_recruitment` <span class="dt">DATE</span> <span class="kw">NULL</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  `bmi` <span class="dt">DOUBLE</span> <span class="kw">NULL</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  `smoking_status` <span class="dt">INT</span> <span class="kw">NULL</span>,</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (`patient_id`)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>) ENGINE<span class="op">=</span>InnoDB;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now we should be able to import the data using the following query:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>  LOAD <span class="kw">DATA</span> INFILE <span class="ot">"/var/lib/mysql-files/study_baseline.txt"</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INTO</span> <span class="kw">TABLE</span> study_patients_innodb</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  FIELDS TERMINATED <span class="kw">BY</span> <span class="ot">"\t"</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  LINES TERMINATED <span class="kw">BY</span> <span class="ot">"\n"</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  IGNORE <span class="dv">1</span> LINES;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here are telling MySQL to load the contents of the file into the specified table, where the columns (fields) are separated by a tab <code>\t</code> and lines end with the <code>\n</code> newline character. We are also telling MySQL to ignore the first line of the file (<code>IGNORE 1 LINES</code>) as it contains a header - not data.</p>
+<p>However, you should observe the above query <strong>fail</strong>.</p>
+<p>This is because MySQL is reading in some rows where values for BMI are missing. It seems to be strange to be failing if BMI is missing as we are allowing for missing values for BMI (and other fields). However, what we might interpret as a missing value being read from file (and therefore <code>NULL</code>) is in fact interpreted as a <strong>string of zero length</strong> prior to any type conversion when reading in text file. MySQL is trying to convert a string of zero length to a <code>DOUBLE</code> for values associated with BMI. A string of length 0 is not equal to <code>NULL</code> - it is an empty string and so MySQL complains as it does not know how to convert this to a value of type <code>DOUBLE</code>. Therefore, we must handle this accordingly by converting strings of length zero to <code>NULL</code>:</p>
+<p>{#importwithnulls}</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>  LOAD <span class="kw">DATA</span> INFILE <span class="ot">"/var/lib/mysql-files/study_baseline.txt"</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INTO</span> <span class="kw">TABLE</span> study_patients_innodb</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  FIELDS TERMINATED <span class="kw">BY</span> <span class="ot">"\t"</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  LINES TERMINATED <span class="kw">BY</span> <span class="ot">"\n"</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  IGNORE <span class="dv">1</span> LINES</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  (patient_id, dob, sex, date_recruitment, @bmi, @smoking_status)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SET</span> bmi <span class="op">=</span> <span class="fu">NULLIF</span>(@bmi, <span class="st">''</span>), smoking_status <span class="op">=</span> <span class="fu">NULLIF</span>(@smoking_status, <span class="st">''</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now MySQL will set the value of the fields <code>bmi</code> and <code>smoking_status</code> to <code>NULL</code> if a string of length zero is found in the respective column in the file.</p>
+<p>The extra clauses we have added at the bottom of the above query are generally only needed for populating tables from files.</p>
+</section>
+<section id="clearing-and-deleting-tables" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="clearing-and-deleting-tables"><span class="header-section-number">14.2</span> Clearing and deleting tables</h2>
+<p><strong>Don’t do this now unless you really need to:</strong> If errors arise and a table’s contents need to be removed, we can use <code>TRUNCATE</code>. For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">TRUNCATE</span> study_patients_innodb;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Don’t do this now unless you really need to:</strong> To delete a table, we can use the <code>DROP</code> clause. For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">DROP</span> study_patients_innodb;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="manually-inserting-records-into-a-table" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="manually-inserting-records-into-a-table"><span class="header-section-number">14.3</span> Manually inserting records into a Table</h2>
+<p>We can insert row values into a table a number of ways that do not involve files. If we want to insert values for all fields in a row, then we use something like the following</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INSERT</span> <span class="kw">INTO</span> study_patients_innodb </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">VALUES</span> (<span class="dv">2348348</span>, <span class="ot">"1985-01-31"</span>, <span class="ot">"Male"</span>, <span class="ot">"2001-04-02"</span>, <span class="dv">21</span>, <span class="dv">0</span>);</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  # <span class="kw">View</span> <span class="kw">new</span> <span class="kw">row</span> <span class="kw">in</span> <span class="kw">table</span>:</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients_innodb   </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> patient_id <span class="op">=</span> <span class="dv">2348348</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can also select specific columns of a new row we wish to populate by specifying the fields we want to load data into:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INSERT</span> <span class="kw">INTO</span> study_patients_innodb </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  (patient_id, dob, sex, date_recruitment)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">VALUES</span> (<span class="dv">3483483</span>, <span class="ot">"1985-02-02"</span>, <span class="ot">"Male"</span>, <span class="ot">"2003-02-28"</span>);</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  # <span class="kw">View</span> <span class="kw">new</span> <span class="kw">row</span> <span class="kw">in</span> <span class="kw">table</span>:</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients_innodb </span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> patient_id <span class="op">=</span> <span class="dv">3483483</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice that we have not specified any values for BMI or smoking status and these will simply default to NULL. This is different to importing data from a file as described above which requires more data processing.</p>
+<hr>
+</section>
+</section>
+<section id="data-updates" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Data updates</h1>
+<p>Data in rows can be updated using the <code>UPDATE</code> and <code>SET</code> clauses. For example, if we wanted to update the field holding BMI values and add 1 BMI unit to every row, we could use:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>  # Preview <span class="kw">data</span> <span class="kw">prior</span> <span class="kw">to</span> <span class="kw">update</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients_innodb</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">10</span>;</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  # Perform <span class="kw">the</span> <span class="kw">update</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">UPDATE</span> study_patients_innodb</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SET</span> bmi <span class="op">=</span> bmi <span class="op">+</span> <span class="dv">1</span>;</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  # Preview updates</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> study_patients_innodb</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note, we may want to only conditionally update values and so we can incorporate the clause into the query.</p>
+<section id="tasks-4" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="tasks-4"><span class="header-section-number">15.1</span> Tasks</h2>
+<ul>
+<li>Update the <code>study_patients_innodb</code> table to recode <code>Female</code> as <code>0</code> and <code>Male</code> as <code>1</code>.</li>
+<li>Update the <code>study_patients_innodb</code> table to recode <code>smoking_status</code> values to the descriptions held in the <code>smoking_codes</code> table. Note this will require you to convert the data type from int to char or varchar first using <code>MODIFY</code> prior to updating the data within the field.</li>
+</ul>
+<p>Here is an example query that would do this that uses the <code>ALTER TABLE</code> clause coupled with <code>MODIFY</code> to define the new data type:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ALTER</span> <span class="kw">TABLE</span> study_patients_innodb</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">MODIFY</span> smoking_status <span class="dt">VARCHAR</span>(<span class="dv">45</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ensuring-referential-integrity" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Ensuring Referential Integrity</h1>
+<p>So far we have not been concerned about whether rules concerning the relationships among entities in our database hold. For example, suppose in addition to data on our study patients we also want cancer data relating to those patients but no other patients. Our queries would enable us to import data for patients in our study and patients in the cancer registry, but no check is currently in place if the patients in the cancer registry are in the study. We are now going to tell MySQL to enforce this condition.</p>
+<p>First we will truncate the <code>study_patients_innodb</code> table as if no data had ever been loaded into it:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">TRUNCATE</span> study_patients_innodb;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, we will recreate a table called <code>cancer_registry_icd10_innodb</code> for the cancer registry data (ICD10-based) and will define a <code>FOREIGN KEY</code> which tells MySQL that one of the fields is a primary key in another table on which this table depends on:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">CREATE</span> <span class="kw">TABLE</span> cancer_registry_icd10_innodb (</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  patient_id  <span class="dt">int</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  entry_date  <span class="dt">date</span> <span class="kw">DEFAULT</span> <span class="kw">NULL</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  icd10       <span class="dt">varchar</span>(<span class="dv">5</span>) <span class="kw">DEFAULT</span> <span class="kw">NULL</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">KEY</span> `index` (patient_id),</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (patient_id) </span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>                <span class="kw">REFERENCES</span> study_patients_innodb(patient_id) </span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>                <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">CASCADE</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  ) ENGINE<span class="op">=</span>InnoDB;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In the above query, we are defining the field that is the foreign key (<code>patient_id</code>) that references the primary key of another table (<code>study_patients_innodb</code>), In addition, if we delete a patient from the <code>study_patients_innodb</code> table, that action will cascade down into the <code>cancer_registry_icd10_innodb</code> table and any entries related to the patient deleted will be removed.</p>
+<section id="tasks-5" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="tasks-5"><span class="header-section-number">16.1</span> Tasks</h2>
+<ul>
+<li>Attempt to load the data in the file <code>cancer_registry_icd10.txt</code> into the <code>cancer_registry_icd10_innodb</code> table. Note, all rows contain values for all columns in the file (there are no zero-length strings in this file).</li>
+<li>Load in the <code>study_baseline.txt</code> file again into <code>study_patients_innodb</code> using the query in section <strong><a href="#import-nulls">14.1</a></strong> prior to attempting to load the data in <code>cancer_registry_icd10.txt</code> into the <code>cancer_registry_icd10_innodb</code> table again.</li>
+<li>Select all records from the <code>cancer_registry_icd10_innodb</code> table where <code>patient_id</code> = 450</li>
+<li>Delete the patient with <code>patient_id</code> = 450 from the <code>study_patients_innodb</code> table:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>   <span class="kw">DELETE</span> <span class="kw">FROM</span> study_patients_innodb</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">WHERE</span> patient_id <span class="op">=</span> <span class="dv">450</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Select all records from the <code>cancer_registry_icd10_innodb</code> table where <code>patient_id</code> = 450 again.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="connecting-to-mysql-through-python-and-r" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Connecting to MySQL through Python and R</h1>
+<section id="connecting-to-mysql-through-python" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="connecting-to-mysql-through-python"><span class="header-section-number">17.1</span> Connecting to MySQL through Python</h2>
+<p>If you want to use MySQL through Python, you will need to load the <code>hpdm098</code> conda environment. In your workshop directory you will find the <code>MySQL_Python_Connection.ipynb</code> file. Open this, run the cells, and modify the script to enable you to run some of the queries in today’s workshop.</p>
+</section>
+<section id="connecting-to-mysql-through-r" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="connecting-to-mysql-through-r"><span class="header-section-number">17.2</span> Connecting to MySQL through R</h2>
+<p>If you want to use MySQL through R, there are a number of R libraries that will enable you to do this. You have the <code>DBI</code> package installed in the <code>hpdm098</code> environment so you do not need to install anything else.</p>
+<p>In your workshop directory you will find the <code>MySQL_R_Connection.ipynb</code> file. Open this, run the cells, and modify the script to enable you to run some of the queries in today’s workshop.</p>
+<hr>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
