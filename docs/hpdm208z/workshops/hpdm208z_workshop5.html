@@ -151,7 +151,6 @@ window.Quarto = {
   <li><a href="#exploring-mysql-databases-and-tables" id="toc-exploring-mysql-databases-and-tables" class="nav-link" data-scroll-target="#exploring-mysql-databases-and-tables"><span class="header-section-number">7</span> Exploring MySQL databases and tables</a>
   <ul class="collapse">
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">7.0.1</span> Questions</a></li>
-  <li><a href="#return-to-the-module-page-to-post-your-thoughts." id="toc-return-to-the-module-page-to-post-your-thoughts." class="nav-link" data-scroll-target="#return-to-the-module-page-to-post-your-thoughts."><span class="header-section-number">7.1</span> <strong>Return to the module page to post your thoughts.</strong></a></li>
   </ul></li>
   <li><a href="#basic-queries" id="toc-basic-queries" class="nav-link" data-scroll-target="#basic-queries"><span class="header-section-number">8</span> Basic Queries</a>
   <ul class="collapse">
@@ -195,7 +194,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#tasks-4" id="toc-tasks-4" class="nav-link" data-scroll-target="#tasks-4"><span class="header-section-number">15.1</span> Tasks</a></li>
   </ul></li>
-  <li><a href="#ensuring-referential-integrity" id="toc-ensuring-referential-integrity" class="nav-link" data-scroll-target="#ensuring-referential-integrity"><span class="header-section-number">16</span> Ensuring Referential Integrity</a>
+  <li><a href="#ensuring-referential-integrity" id="toc-ensuring-referential-integrity" class="nav-link" data-scroll-target="#ensuring-referential-integrity"><span class="header-section-number">16</span> Ensuring referential integrity</a>
   <ul class="collapse">
   <li><a href="#tasks-5" id="toc-tasks-5" class="nav-link" data-scroll-target="#tasks-5"><span class="header-section-number">16.1</span> Tasks</a></li>
   </ul></li>
@@ -419,9 +418,8 @@ mysql&gt;</code></pre>
 <li>What is the difference between <code>char()</code> and <code>varchar()</code> ?</li>
 <li>What is the difference between <code>PRI</code>, <code>UNI</code>, <code>MUL</code> values that can appear in the field?</li>
 </ul>
-</section>
-<section id="return-to-the-module-page-to-post-your-thoughts." class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="return-to-the-module-page-to-post-your-thoughts."><span class="header-section-number">7.1</span> <strong>Return to the module page to post your thoughts.</strong></h2>
+<p><strong>Return to the module page to post your thoughts.</strong></p>
+<hr>
 </section>
 </section>
 <section id="basic-queries" class="level1" data-number="8">
@@ -633,6 +631,7 @@ mysql&gt;</code></pre>
 <ul>
 <li>Compare the descriptions and counts for codes with in the description between ICD9 and ICD10 definitions.</li>
 </ul>
+<p><strong>Return to the module page to post a screenshot of the query and results</strong></p>
 <hr>
 </section>
 </section>
@@ -718,6 +717,7 @@ mysql&gt;</code></pre>
 <li>reported their smoking status as or at baseline</li>
 <li>are in the cancer registry (ICD10) or death registry, but not both</li>
 </ul>
+<p><strong>Return to the module page to post a screenshot of the query and results</strong></p>
 <hr>
 </section>
 </section>
@@ -916,6 +916,7 @@ mysql&gt;</code></pre>
 <li>Execute the query and then view the file using <code>less</code> or <code>more</code> in Linux.</li>
 <li>Update the query to add a header prior to exporting. Resolve any issues that arise in creating the same file again (either through MySQL or Linux).</li>
 </ul>
+<p><strong>Return to the module page to post a screenshot of the query and results</strong></p>
 <hr>
 </section>
 </section>
@@ -1028,11 +1029,12 @@ mysql&gt;</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ALTER</span> <span class="kw">TABLE</span> study_patients_innodb</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">MODIFY</span> smoking_status <span class="dt">VARCHAR</span>(<span class="dv">45</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p><strong>Return to the module page to post a screenshot of the query and results</strong></p>
 <hr>
 </section>
 </section>
 <section id="ensuring-referential-integrity" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Ensuring Referential Integrity</h1>
+<h1 data-number="16"><span class="header-section-number">16</span> Ensuring referential integrity</h1>
 <p>So far we have not been concerned about whether rules concerning the relationships among entities in our database hold. For example, suppose in addition to data on our study patients we also want cancer data relating to those patients but no other patients. Our queries would enable us to import data for patients in our study and patients in the cancer registry, but no check is currently in place if the patients in the cancer registry are in the study. We are now going to tell MySQL to enforce this condition.</p>
 <p>First we will truncate the <code>study_patients_innodb</code> table as if no data had ever been loaded into it:</p>
 <div class="cell">
@@ -1066,6 +1068,7 @@ mysql&gt;</code></pre>
 <ul>
 <li>Select all records from the <code>cancer_registry_icd10_innodb</code> table where <code>patient_id</code> = 450 again.</li>
 </ul>
+<p><strong>Return to the module page to post a screenshot of the query and results</strong></p>
 <hr>
 </section>
 </section>
