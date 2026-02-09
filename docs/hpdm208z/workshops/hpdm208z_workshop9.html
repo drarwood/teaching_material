@@ -556,7 +556,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stderr">
 <pre><code>Setting direction: controls &lt; cases</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc_obj, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"ROC Curve"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc_obj, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">main =</span> <span class="st">"ROC Curve"</span>, <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -590,7 +590,9 @@ window.Quarto = {
 <li><code>t2d_snp_genotypes.txt</code></li>
 <li><code>t2d_snp_weights.txt</code></li>
 </ul></li>
+<li>Compare the ROC-AUC from the T2D PRS for type 2 diabetes with the ROC-AUC from the CAD PRS for coronary artery disease. Do you know notice any differences?</li>
 </ul>
+<p><strong>Return to the course page to post your thoughts</strong></p>
 </section>
 <section id="incorporting-more-features-snps-into-a-prs" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Incorporting more features (SNPs) into a PRS</h1>
@@ -938,7 +940,7 @@ window.Quarto = {
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">NULL</span></span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merege phenotype data into a DF</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge phenotype data into a DF</span></span>
 <span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>cad_prs <span class="ot">=</span> <span class="fu">merge</span>(cad_prs, study2_pheno, <span class="at">by=</span><span class="st">"id"</span>)</span>
 <span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="co"># create roc object we can use for funtions associated with pROC</span></span>
