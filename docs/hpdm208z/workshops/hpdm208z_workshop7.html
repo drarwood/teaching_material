@@ -652,6 +652,22 @@ J              0           1           0          0          0</code></pre>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> <span class="dt">\</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> t2d_gwas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>This command outputs a file called <code>t2d_gwas.assoc.logistic</code>. Let’s preview the file using <code>less</code> or <code>head</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> t2d_gwas.assoc.logistic</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">CHR</span>         SNP         BP   A1       TEST    NMISS         OR         STAT            P </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1001000    1001000    C        ADD     5000      1.441         1.86       0.0629</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1003000    1003000    T        ADD     5000     0.9281      <span class="at">-0.3626</span>       0.7169</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1005000    1005000    A        ADD     5000     0.8369       <span class="at">-1.086</span>       0.2774</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1007000    1007000    A        ADD     5000     0.9354      <span class="at">-0.8425</span>       0.3995</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1009000    1009000    G        ADD     5000      1.181       0.7222       0.4701</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1011000    1011000    T        ADD     5000      1.193          2.9     0.003726</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1013000    1013000    T        ADD     5000     0.9243       <span class="at">-1.537</span>       0.1244</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1015000    1015000    C        ADD     5000      1.163       0.9209       0.3571</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1017000    1017000    G        ADD     5000     0.9553      <span class="at">-0.7058</span>       0.4803</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p>Here is a table that describes the columns in the output</p>
 <table class="caption-top table">
 <colgroup>
@@ -704,6 +720,7 @@ J              0           1           0          0          0</code></pre>
 <ul>
 <li>Are there any genome-wide significant associations reaching P&lt;5X10-8?</li>
 <li>For the genetic variant with the smallest P-value, what does the odds ratio tell us?</li>
+<li>Can you think of any covariates we might want to adjust for in this analysis and, if so, why?</li>
 </ul>
 <p>We are going to look more at genetic association testing next week, including meta-analysis and potential confounding of statistical associations.</p>
 </section>
