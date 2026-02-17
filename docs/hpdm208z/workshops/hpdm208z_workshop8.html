@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>In the previous workshop, we introduced <a href="https://www.cog-genomics.org/plink/">PLINK</a> to process genetic data for the purposes of data conversion, calculations, filtering, and running a genetic association study of a binary outcome. In this workshop, you will take a deeper dive into performing genetic association of common human traits, meta-analyse results, and account for potential confounding caused by differences in genetic ancestry of individuals in the data set.</p>
+<p>In the previous workshop, we introduced <a href="https://www.cog-genomics.org/plink/">PLINK</a> to process genetic data for the purposes of data conversion, calculations, filtering, and running a genetic association study of a binary outcome. In this workshop, you will take a deeper dive into performing genetic association testing of common human traits, meta-analysis of results, and accounting for potential confounding caused by differences in genetic ancestry of individuals in a data set.</p>
 </section>
 <section id="aims-of-workshop" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Aims of workshop</h1>
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><code>height_study1.[bed|bim|fam]</code></td>
-<td>Genetic data on 10,000 SNPs in 4,000 individuals. Height (cm) in .fam file</td>
+<td>Genetic data on 10,000 SNPs in 10,000 individuals. Height (cm) in .fam file</td>
 </tr>
 <tr class="even">
 <td><code>height_study1.covar</code></td>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td><code>height_study2.[bed|bim|fam]</code></td>
-<td>Genetic data on 10,000 SNPs in 4,000 individuals. Height (cm) in .fam file</td>
+<td>Genetic data on 10,000 SNPs in 10,000 individuals. Height (cm) in .fam file</td>
 </tr>
 <tr class="even">
 <td><code>height_study2.covar</code></td>
@@ -242,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="running-a-gwas-for-adult-human-height" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Running a GWAS for adult human height</h1>
-<p>We will first use PLINK to perform basic association testing of genetic variants against a continuous phenotype (adult height) which adjusting for covariates that can influence the outcome (age and sex).</p>
+<p>We will first use PLINK to perform basic association testing of genetic variants against a continuous phenotype (adult height) while adjusting for covariates that can influence the outcome (age and sex).</p>
 <p>We will ask PLINK to perform a linear-regression based analyses for each genetic variant. We will require the following options:</p>
 <ul>
 <li><code>--bfile</code> - file prefix of the .bed .bim .fam files containing data on genotypes. The phenotype is held in the last column of the .fam file</li>
@@ -258,21 +258,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--covar</span> height_study1.covar <span class="dt">\</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> height_study1_gwas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>PLINK will generate an output file called <code>height_study1_gwas.assoc.linear</code>. Let’s take a look at it:</p>
+<p>Using the command above, PLINK will generate an output file called <code>height_study1_gwas.assoc.linear</code>. Let’s take a look at it:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> height_study1_gwas.assoc.linear</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">CHR</span>         SNP         BP   A1       TEST    NMISS       BETA         STAT            P </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1001000    1001000    G        ADD     4000    <span class="at">-0.4377</span>      <span class="at">-0.4258</span>       0.6703</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1003000    1003000    C        ADD     4000      2.022        2.284      0.02245</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1005000    1005000    A        ADD     4000     0.9893        1.414       0.1574</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1007000    1007000    T        ADD     4000     0.1553       0.4785       0.6323</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1009000    1009000    C        ADD     4000     0.1717       0.1763         0.86</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1011000    1011000    T        ADD     4000    <span class="at">-0.2038</span>      <span class="at">-0.7835</span>       0.4334</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1013000    1013000    C        ADD     4000   0.009266      0.04287       0.9658</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1015000    1015000    G        ADD     4000     0.7546        1.039       0.2988</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1017000    1017000    C        ADD     4000     0.2697        1.005        0.315</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1001000    1001000    C        ADD    10000    <span class="at">-0.7364</span>       <span class="at">-1.249</span>       0.2116</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1003000    1003000    C        ADD    10000      0.882        1.604       0.1088</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1005000    1005000    G        ADD    10000   <span class="at">-0.01133</span>     <span class="at">-0.02728</span>       0.9782</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1007000    1007000    G        ADD    10000    <span class="at">-0.1459</span>      <span class="at">-0.7232</span>       0.4696</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1009000    1009000    A        ADD    10000     0.4892       0.8272       0.4081</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1011000    1011000    G        ADD    10000     <span class="at">-0.298</span>       <span class="at">-1.821</span>      0.06858</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1013000    1013000    G        ADD    10000   <span class="at">-0.08145</span>      <span class="at">-0.6061</span>       0.5444</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1015000    1015000    T        ADD    10000    0.07354       0.1666       0.8676</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>   <span class="ex">1</span>   1:1017000    1017000    A        ADD    10000   <span class="at">-0.05728</span>      <span class="at">-0.3473</span>       0.7284</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here is a table that describes the columns in the output</p>
 <table class="caption-top table">
@@ -599,9 +599,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dealing-with-population-stratification" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Dealing with population stratification</h1>
-<p>The allele frequencies of many genetic variants are not constant across different parts of the world - some alleles are more frequent among some populations compared to others. If there are differences in <strong>genetic ancestry</strong> among individuals included in a single GWAS analysis, then there is potential for false-positive associations to arise. In the context of a disease, this can happen if there is an over-representation of disease cases from a genetic ancestry combined with differences in allele frequencies across genetic ancestries that create false associations between the genetic variant and the disease outcome. For continuous traits, false-positive associations could occur when higher levels of the trait are over-represented by a genetic ancestry with higher allele frequencies compared to other genetic ancestries.</p>
+<p>The allele frequencies of many genetic variants are not constant across different parts of the world - some alleles are more frequent among some populations compared to others. If there are differences in <strong>genetic ancestry</strong> among individuals included in a single GWAS analysis, then there is potential for false-positive associations to arise.</p>
+<p>In the context of a disease, this can happen when there is a both an over-representation of disease cases from a genetic ancestry and systematic differences in allele frequencies between that ancestry and other ancestries. This introduces spurious correlations between genotypes and disease status. For continuous traits, false-positive associations could occur when higher levels of the trait are over-represented by a genetic ancestry with higher allele frequencies compared to other genetic ancestries.</p>
 <p>These scenarios are referred to as <strong>population stratification</strong> and should be accounted for when running analyses.</p>
-<p>In the following analyses we will use genetics to estimate the genetic ancestry of individuals and relative differences among individuals through principal components analysis (PCA).</p>
+<p>In the following analyses we will use genetics to estimate the genetic ancestral similarity of individuals and relative differences among individuals using an unsupervised machine learning method - <strong>principal components analysis (PCA)</strong>.</p>
 <section id="football-world-cup" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="football-world-cup"><span class="header-section-number">9.1</span> Football World Cup</h2>
 <p>To demonstrate the requirement to handle population stratification, we are going to perform a GWAS based on data from a questionnaire that asked individuals who went to the FIFA World Cup 2022 in Qatar whether they preferred to watch a match involving a team from East Asia or from somewhere else.</p>
@@ -743,30 +744,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0     EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.246447   
-1     EUR  HG00099 -13.755650  34.191333  -9.868827  10.543570 -10.405918   
-2     EUR  HG00101 -15.388023  32.814107 -10.876452  11.691982  -6.816328   
-3     EUR  HG00102 -14.205595  34.352392  -9.414806  10.879079  -5.197191   
-4     EUR  HG00105 -13.501380  34.263998 -10.330081  11.573443  -8.836470   
+0     EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.223171   
+1     EUR  HG00099 -13.755650  34.191333  -9.868827  10.543573 -10.402502   
+2     EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.811757   
+3     EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.217198   
+4     EUR  HG00105 -13.501380  34.263998 -10.330082  11.573441  -8.824136   
 ...   ...      ...        ...        ...        ...        ...        ...   
-1218  SAS  NA21126 -14.292971  11.482773  25.966832  -7.466799   6.920201   
-1219  SAS  NA21129 -15.448805  11.583855  26.828434  -6.437025   8.959980   
-1220  SAS  NA21130 -16.056254  12.398727  24.178645  -4.723239   9.294914   
-1221  SAS  NA21137 -14.480684  12.466331  24.084101  -7.164242   8.033472   
-1222  SAS  NA21144 -15.443296  10.985882  24.076536  -3.940124  17.915145   
+1218  SAS  NA21126 -14.292971  11.482773  25.966832  -7.466799   6.938935   
+1219  SAS  NA21129 -15.448805  11.583855  26.828434  -6.437025   8.942733   
+1220  SAS  NA21130 -16.056254  12.398727  24.178645  -4.723238   9.307236   
+1221  SAS  NA21137 -14.480684  12.466331  24.084101  -7.164244   8.027885   
+1222  SAS  NA21144 -15.443296  10.985882  24.076536  -3.940126  17.916464   
 
            PC6        PC7       PC8       PC9       PC10  
-0    -0.847871  -4.507649 -3.122444 -4.005192  -0.986724  
-1    -1.692164  -6.100510 -4.064720 -3.273410  -1.586113  
-2    -0.576181  -2.904002 -5.352574 -4.186444   0.067547  
-3    -1.269524  -3.728903 -5.922491 -3.375707  -1.704644  
-4    -0.947017  -2.878659 -3.017741 -1.606037  -2.826776  
+0    -0.888078  -4.567888 -3.391945 -3.684503  -1.562291  
+1    -1.713591  -6.016420 -4.111053 -2.977852  -0.108797  
+2    -0.553221  -2.817986 -5.671878 -4.101227   0.976221  
+3    -1.242405  -3.750483 -5.727512 -3.820737  -0.938805  
+4    -0.955391  -2.830745 -3.036682 -1.768552  -3.202078  
 ...        ...        ...       ...       ...        ...  
-1218 -1.804971  -9.149221  0.466062 -4.434851 -17.550581  
-1219 -2.758406 -11.193569  2.644646 -1.158733 -17.042314  
-1220  1.279320  -7.323739 -4.405563  7.215566 -15.095615  
-1221 -3.723464  -9.769287  2.757716 -5.488206 -19.771854  
-1222  1.234808  -7.993322  0.554802  4.710460 -17.937987  
+1218 -1.808324  -9.403323  0.135162 -3.704080 -16.305726  
+1219 -2.791809 -11.121002  2.493865 -2.337113 -15.577742  
+1220  1.268192  -7.450054 -4.435367  7.180816 -13.898585  
+1221 -3.740894  -9.762572  3.083523 -5.597193 -18.851852  
+1222  1.248205  -8.178035  0.572665  4.050248 -16.696041  
 
 [1223 rows x 12 columns]</code></pre>
 </div>
@@ -803,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now that we have defined a principal component space for the reference data we have from the 1000 Genomes Project, we will now project new samples into the same space. However, <strong>we must ensure the following</strong>:</p>
 <ul>
 <li>the same 100,000 variables (i.e.&nbsp;SNPs) found in the reference data are available in the new sample data and in the same column order</li>
-<li>the numerical representation of genotypes for SNPs in the new sample data is the <strong>same</strong> as the reference data. For example, an A/G SNP coded as in the reference data must be coded the same way in the new sample data (so not ) (they are in this workshop).</li>
+<li>the numerical representation of genotypes for SNPs in the new sample data is the <strong>same</strong> as the reference data. For example, an A/G SNP coded as <code>0=AA, 1=AG, 2=GG</code> in the reference data must be coded the same way in the new sample data (so not <code>0=GG, 1=AG, 2=AA</code>). Note, the alleles are already aligned in this workshop so we don’t have to worry about this here.</li>
 </ul>
 <p>First, load in the study genotypes into Pandas DFs as before - one to hold genetic ancestry (currently unknown) and the unique identifier of each individual. Note the file to be read in is of the same format as the reference dataset.</p>
 <div class="cell">
@@ -837,30 +838,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>study_sample_pcs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0     HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696762  -3.579741   
-1     HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149989  -1.567713   
-2     HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536956  -3.963411   
-3     HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378976   0.761151   
-4     HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656  -3.193826   
+0     HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696762  -3.575602   
+1     HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149989  -1.569979   
+2     HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536956  -3.958167   
+3     HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378977   0.757125   
+4     HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656  -3.191427   
 ...       ...      ...        ...        ...        ...        ...        ...   
-1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.243818   
-1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778283   6.258920   
-1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750599  14.203063   
-1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.981875   
-1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.233778   
+1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.244474   
+1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.266181   
+1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.199675   
+1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983942   
+1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.235562   
 
            PC6       PC7       PC8       PC9      PC10  
-0    -1.759467 -1.780366 -0.649926 -2.989277  3.101107  
-1    -0.844315  1.138692  0.681300 -2.795736 -3.850862  
-2    -1.080654 -2.886550 -1.516228 -3.211388  1.594532  
-3     3.081737  1.550499 -2.892502  3.065581 -2.350927  
-4    -0.311918 -1.791790 -3.548409 -0.817372  1.017250  
+0    -1.745623 -1.756315 -0.751668 -2.751876  3.355879  
+1    -0.848598  1.167276  0.643437 -2.874695 -4.118114  
+2    -1.070391 -2.871581 -1.626265 -2.932616  1.600489  
+3     3.080755  1.547443 -2.937123  3.151490 -2.294774  
+4    -0.328117 -1.762294 -3.549423 -0.598979  0.943659  
 ...        ...       ...       ...       ...       ...  
-1217  0.750852 -4.769615 -2.859013  3.121700 -7.273631  
-1218  1.198453 -4.813004 -3.233201  4.003518 -7.302238  
-1219  1.414049 -3.422092  0.029874  1.261054 -7.715596  
-1220  3.383839 -3.189603 -0.718243  1.053569 -8.489681  
-1221  1.605135 -3.720917 -0.465105  2.442628 -7.454460  
+1217  0.751537 -4.816121 -2.867464  2.941782 -7.183444  
+1218  1.197940 -4.846997 -3.246102  4.019751 -6.715075  
+1219  1.417505 -3.467693  0.030532  1.131823 -7.046247  
+1220  3.392113 -3.229647 -0.769242  0.931158 -8.085938  
+1221  1.622644 -3.755588 -0.478032  2.094427 -7.072027  
 
 [1222 rows x 12 columns]</code></pre>
 </div>
@@ -1043,67 +1044,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 weighted avg       1.00      1.00      1.00      1223</code></pre>
 </div>
 </div>
-<p>These numbers suggest that 5 individuals who are of Ad-mixed American genetic ancestry have been incorrectly labelled as European.</p>
-<p>Let’s take a look at the estimated probabilities that each subject belongs to the broad genetic ancestry defined. Note the columns are ordered as AFR, AMR, EAS, EUR, SAS.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> gridSearchResults.best_estimator_</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> best_model.predict_proba(X3)</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>ancestry_obs_vs_pred <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"observed"</span>: y,</span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"predicted"</span>: y_pred</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add probability columns</span></span>
-<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>prob_cols <span class="op">=</span> [<span class="ss">f"prob_</span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> c <span class="kw">in</span> best_model.classes_]</span>
-<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>ancestry_obs_vs_pred[prob_cols] <span class="op">=</span> probs</span>
-<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ancestry_obs_vs_pred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     observed predicted  prob_AFR  prob_AMR  prob_EAS  prob_EUR  prob_SAS
-0         EUR       EUR       0.0       0.0       0.0       1.0       0.0
-1         EUR       EUR       0.0       0.0       0.0       1.0       0.0
-2         EUR       EUR       0.0       0.0       0.0       1.0       0.0
-3         EUR       EUR       0.0       0.0       0.0       1.0       0.0
-4         EUR       EUR       0.0       0.0       0.0       1.0       0.0
-...       ...       ...       ...       ...       ...       ...       ...
-1218      SAS       SAS       0.0       0.0       0.0       0.0       1.0
-1219      SAS       SAS       0.0       0.0       0.0       0.0       1.0
-1220      SAS       SAS       0.0       0.0       0.0       0.0       1.0
-1221      SAS       SAS       0.0       0.0       0.0       0.0       1.0
-1222      SAS       SAS       0.0       0.0       0.0       0.0       1.0
-
-[1223 rows x 7 columns]</code></pre>
-</div>
-</div>
-<p>Now subset where observed != predicted ancestry label</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ancestry_obs_vs_pred[ancestry_obs_vs_pred[<span class="st">"observed"</span>] <span class="op">!=</span> ancestry_obs_vs_pred[<span class="st">"predicted"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    observed predicted  prob_AFR  prob_AMR  prob_EAS  prob_EUR  prob_SAS
-128      AMR       EUR       0.0       1.0       0.0       0.0       0.0
-146      AMR       EUR       0.0       1.0       0.0       0.0       0.0
-149      AMR       EUR       0.0       1.0       0.0       0.0       0.0
-163      AMR       EUR       0.0       1.0       0.0       0.0       0.0
-195      AMR       EUR       0.0       1.0       0.0       0.0       0.0</code></pre>
-</div>
-</div>
+<p>These numbers suggest that 5 individuals who are of Ad-mixed American genetic ancestry have been incorrectly labelled as European but overall this classifier seems to perform well given the confusion matrix, precision and recall.</p>
 </section>
 <section id="applying-tuned-machine-learning-algorithm-to-study" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="applying-tuned-machine-learning-algorithm-to-study"><span class="header-section-number">10.4</span> Applying tuned machine-learning algorithm to study</h2>
 <p>Now we have the arguments that minimize the classification error rate in the reference data, we can apply them to our study data to label each individual with their genetic ancestry based on their proximity to the individuals in the reference data. Again, we will use the first 5 PCs to do this.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create standardized principal components for the study individuals we are trying to classify</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>X4 <span class="op">=</span> standardizer.transform(study_sample_pcs.iloc[:,<span class="dv">2</span>:<span class="dv">7</span>].values)</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify and return labels as a list</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>study_sample_ancestry_groups <span class="op">=</span> gridSearchResults.predict(X4).tolist() </span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE "POP" field in the study_samples_pcs DF with the ancestries inferred through KNN </span></span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>study_sample_pcs[<span class="st">"POP"</span>] <span class="op">=</span> study_sample_ancestry_groups</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the number of individuals classified into each of the populations</span></span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>study_sample_pcs[<span class="st">"POP"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create standardized principal components for the study individuals we are trying to classify</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>X4 <span class="op">=</span> standardizer.transform(study_sample_pcs.iloc[:,<span class="dv">2</span>:<span class="dv">7</span>].values)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify and return labels as a list</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>study_sample_ancestry_groups <span class="op">=</span> gridSearchResults.predict(X4).tolist() </span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="co"># CREATE "POP" field in the study_samples_pcs DF with the ancestries inferred through KNN </span></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>study_sample_pcs[<span class="st">"POP"</span>] <span class="op">=</span> study_sample_ancestry_groups</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the number of individuals classified into each of the populations</span></span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>study_sample_pcs[<span class="st">"POP"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>POP
 AFR    309
@@ -1116,90 +1073,90 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>Let’s visually check to see if our KNN classifier has done a seemingly good job by plotting PC1 vs PC2, and PC3 vs PC4. Let’s combine the reference data with the study data and plot all data together:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack the ref PCs and study PCs on top of each other</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>samples_combined <span class="op">=</span> pd.concat([ref_sample_pcs, study_sample_pcs])</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace missing values created in the "POP" field for the reference data to the FID values that hold the ancestry codes:</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>samples_combined[<span class="st">"POP"</span>] <span class="op">=</span> samples_combined[<span class="st">"POP"</span>].fillna(samples_combined[<span class="st">"FID"</span>])</span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co"># PREVIEW</span></span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>samples_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack the ref PCs and study PCs on top of each other</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>samples_combined <span class="op">=</span> pd.concat([ref_sample_pcs, study_sample_pcs])</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace missing values created in the "POP" field for the reference data to the FID values that hold the ancestry codes:</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>samples_combined[<span class="st">"POP"</span>] <span class="op">=</span> samples_combined[<span class="st">"POP"</span>].fillna(samples_combined[<span class="st">"FID"</span>])</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># PREVIEW</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>samples_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.246447   
-1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543570 -10.405918   
-2         EUR  HG00101 -15.388023  32.814107 -10.876452  11.691982  -6.816328   
-3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879079  -5.197191   
-4         EUR  HG00105 -13.501380  34.263998 -10.330081  11.573443  -8.836470   
+0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.223171   
+1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543573 -10.402502   
+2         EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.811757   
+3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.217198   
+4         EUR  HG00105 -13.501380  34.263998 -10.330082  11.573441  -8.824136   
 ...       ...      ...        ...        ...        ...        ...        ...   
-1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.243818   
-1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778283   6.258920   
-1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750599  14.203063   
-1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.981875   
-1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.233778   
+1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.244474   
+1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.266181   
+1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.199675   
+1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983942   
+1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.235562   
 
            PC6       PC7       PC8       PC9      PC10  POP  
-0    -0.847871 -4.507649 -3.122444 -4.005192 -0.986724  EUR  
-1    -1.692164 -6.100510 -4.064720 -3.273410 -1.586113  EUR  
-2    -0.576181 -2.904002 -5.352574 -4.186444  0.067547  EUR  
-3    -1.269524 -3.728903 -5.922491 -3.375707 -1.704644  EUR  
-4    -0.947017 -2.878659 -3.017741 -1.606037 -2.826776  EUR  
+0    -0.888078 -4.567888 -3.391945 -3.684503 -1.562291  EUR  
+1    -1.713591 -6.016420 -4.111053 -2.977852 -0.108797  EUR  
+2    -0.553221 -2.817986 -5.671878 -4.101227  0.976221  EUR  
+3    -1.242405 -3.750483 -5.727512 -3.820737 -0.938805  EUR  
+4    -0.955391 -2.830745 -3.036682 -1.768552 -3.202078  EUR  
 ...        ...       ...       ...       ...       ...  ...  
-1217  0.750852 -4.769615 -2.859013  3.121700 -7.273631  SAS  
-1218  1.198453 -4.813004 -3.233201  4.003518 -7.302238  SAS  
-1219  1.414049 -3.422092  0.029874  1.261054 -7.715596  SAS  
-1220  3.383839 -3.189603 -0.718243  1.053569 -8.489681  SAS  
-1221  1.605135 -3.720917 -0.465105  2.442628 -7.454460  SAS  
+1217  0.751537 -4.816121 -2.867464  2.941782 -7.183444  SAS  
+1218  1.197940 -4.846997 -3.246102  4.019751 -6.715075  SAS  
+1219  1.417505 -3.467693  0.030532  1.131823 -7.046247  SAS  
+1220  3.392113 -3.229647 -0.769242  0.931158 -8.085938  SAS  
+1221  1.622644 -3.755588 -0.478032  2.094427 -7.072027  SAS  
 
 [2445 rows x 13 columns]</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>groups <span class="op">=</span> samples_combined.groupby(<span class="st">"POP"</span>)</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC1, group.PC2, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC1 vs PC2"</span>)</span>
-<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC1"</span>)</span>
-<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC2"</span>)</span>
-<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>groups <span class="op">=</span> samples_combined.groupby(<span class="st">"POP"</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC1, group.PC2, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC1 vs PC2"</span>)</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC1"</span>)</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC2"</span>)</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-42-7.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-40-7.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC3, group.PC4, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC3 vs PC4"</span>)</span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC3"</span>)</span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC4"</span>)</span>
-<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC3, group.PC4, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC3 vs PC4"</span>)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC3"</span>)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC4"</span>)</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-42-8.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-40-8.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC5, group.PC6, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC5 vs PC6"</span>)</span>
-<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC5"</span>)</span>
-<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC6"</span>)</span>
-<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> groups:</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC5, group.PC6, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project and Study: PC5 vs PC6"</span>)</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC5"</span>)</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC6"</span>)</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-42-9.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm208z_workshop8_files/figure-html/unnamed-chunk-40-9.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
