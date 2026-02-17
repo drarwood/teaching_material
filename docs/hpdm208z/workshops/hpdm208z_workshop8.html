@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#defining-targets" id="toc-defining-targets" class="nav-link" data-scroll-target="#defining-targets"><span class="header-section-number">10.1</span> Defining targets</a></li>
   <li><a href="#creating-and-using-a-grid-search" id="toc-creating-and-using-a-grid-search" class="nav-link" data-scroll-target="#creating-and-using-a-grid-search"><span class="header-section-number">10.2</span> Creating and using a grid search</a></li>
   <li><a href="#assessing-performance-based-on-cross-validation" id="toc-assessing-performance-based-on-cross-validation" class="nav-link" data-scroll-target="#assessing-performance-based-on-cross-validation"><span class="header-section-number">10.3</span> Assessing performance based on cross-validation</a></li>
-  <li><a href="#applying-tuned-machine-learning-algorithm-to-study" id="toc-applying-tuned-machine-learning-algorithm-to-study" class="nav-link" data-scroll-target="#applying-tuned-machine-learning-algorithm-to-study"><span class="header-section-number">10.4</span> Applying tuned machine-learning algorithm to study</a></li>
+  <li><a href="#applying-machine-learning-algorithm-with-tuned-hyperparameters" id="toc-applying-machine-learning-algorithm-with-tuned-hyperparameters" class="nav-link" data-scroll-target="#applying-machine-learning-algorithm-with-tuned-hyperparameters"><span class="header-section-number">10.4</span> Applying machine-learning algorithm with tuned hyperparameters</a></li>
   <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2"><span class="header-section-number">10.5</span> Task</a></li>
   </ul></li>
   </ul>
@@ -744,30 +744,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0     EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.223171   
-1     EUR  HG00099 -13.755650  34.191333  -9.868827  10.543573 -10.402502   
-2     EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.811757   
-3     EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.217198   
-4     EUR  HG00105 -13.501380  34.263998 -10.330082  11.573441  -8.824136   
+0     EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.248659   
+1     EUR  HG00099 -13.755650  34.191333  -9.868827  10.543570 -10.380949   
+2     EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.806517   
+3     EUR  HG00102 -14.205595  34.352392  -9.414806  10.879079  -5.199596   
+4     EUR  HG00105 -13.501380  34.263998 -10.330081  11.573443  -8.856633   
 ...   ...      ...        ...        ...        ...        ...        ...   
-1218  SAS  NA21126 -14.292971  11.482773  25.966832  -7.466799   6.938935   
-1219  SAS  NA21129 -15.448805  11.583855  26.828434  -6.437025   8.942733   
-1220  SAS  NA21130 -16.056254  12.398727  24.178645  -4.723238   9.307236   
-1221  SAS  NA21137 -14.480684  12.466331  24.084101  -7.164244   8.027885   
-1222  SAS  NA21144 -15.443296  10.985882  24.076536  -3.940126  17.916464   
+1218  SAS  NA21126 -14.292971  11.482773  25.966832  -7.466801   6.907043   
+1219  SAS  NA21129 -15.448805  11.583855  26.828434  -6.437027   8.954984   
+1220  SAS  NA21130 -16.056254  12.398727  24.178645  -4.723237   9.322577   
+1221  SAS  NA21137 -14.480684  12.466331  24.084101  -7.164242   8.024390   
+1222  SAS  NA21144 -15.443296  10.985882  24.076536  -3.940127  17.912887   
 
            PC6        PC7       PC8       PC9       PC10  
-0    -0.888078  -4.567888 -3.391945 -3.684503  -1.562291  
-1    -1.713591  -6.016420 -4.111053 -2.977852  -0.108797  
-2    -0.553221  -2.817986 -5.671878 -4.101227   0.976221  
-3    -1.242405  -3.750483 -5.727512 -3.820737  -0.938805  
-4    -0.955391  -2.830745 -3.036682 -1.768552  -3.202078  
+0    -0.878138  -4.520736 -3.365676 -4.221558   1.107865  
+1    -1.693816  -5.966099 -3.783902 -3.527381   0.614973  
+2    -0.587681  -2.750775 -5.732242 -3.818476   2.210309  
+3    -1.299292  -3.553589 -5.761407 -3.533703   0.833023  
+4    -0.963731  -2.920343 -3.335881 -2.428733  -1.363890  
 ...        ...        ...       ...       ...        ...  
-1218 -1.808324  -9.403323  0.135162 -3.704080 -16.305726  
-1219 -2.791809 -11.121002  2.493865 -2.337113 -15.577742  
-1220  1.268192  -7.450054 -4.435367  7.180816 -13.898585  
-1221 -3.740894  -9.762572  3.083523 -5.597193 -18.851852  
-1222  1.248205  -8.178035  0.572665  4.050248 -16.696041  
+1218 -1.765146  -9.179737  0.308128 -4.197811 -16.341620  
+1219 -2.750567 -10.999121  2.704058 -2.335698 -17.395517  
+1220  1.303396  -7.328739 -3.733178  6.828819 -15.537615  
+1221 -3.750932  -9.624530  3.078379 -6.341004 -17.904236  
+1222  1.315217  -7.869899  1.247662  4.305544 -17.525172  
 
 [1223 rows x 12 columns]</code></pre>
 </div>
@@ -838,30 +838,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>study_sample_pcs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0     HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696762  -3.575602   
-1     HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149989  -1.569979   
-2     HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536956  -3.958167   
-3     HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378977   0.757125   
-4     HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656  -3.191427   
+0     HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696762  -3.575763   
+1     HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149988  -1.568393   
+2     HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536957  -3.959848   
+3     HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378976   0.761252   
+4     HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656  -3.193370   
 ...       ...      ...        ...        ...        ...        ...        ...   
-1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.244474   
-1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.266181   
-1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.199675   
-1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983942   
-1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.235562   
+1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879760   6.244087   
+1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.265334   
+1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.203425   
+1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.984097   
+1221  NA21143  NA21143 -16.582568   9.514909  22.259031  -4.312041  12.234487   
 
            PC6       PC7       PC8       PC9      PC10  
-0    -1.745623 -1.756315 -0.751668 -2.751876  3.355879  
-1    -0.848598  1.167276  0.643437 -2.874695 -4.118114  
-2    -1.070391 -2.871581 -1.626265 -2.932616  1.600489  
-3     3.080755  1.547443 -2.937123  3.151490 -2.294774  
-4    -0.328117 -1.762294 -3.549423 -0.598979  0.943659  
+0    -1.749357 -1.758583 -0.597929 -2.754827  3.484493  
+1    -0.865930  1.192822  0.566558 -2.792040 -3.372379  
+2    -1.071685 -2.878872 -1.471800 -3.045611  2.145038  
+3     3.072384  1.575493 -2.918733  3.214377 -1.876545  
+4    -0.300740 -1.794649 -3.456817 -0.846815  0.915893  
 ...        ...       ...       ...       ...       ...  
-1217  0.751537 -4.816121 -2.867464  2.941782 -7.183444  
-1218  1.197940 -4.846997 -3.246102  4.019751 -6.715075  
-1219  1.417505 -3.467693  0.030532  1.131823 -7.046247  
-1220  3.392113 -3.229647 -0.769242  0.931158 -8.085938  
-1221  1.622644 -3.755588 -0.478032  2.094427 -7.072027  
+1217  0.755760 -4.808882 -2.705048  2.953586 -7.807425  
+1218  1.198882 -4.817298 -2.986732  3.898059 -7.458517  
+1219  1.418397 -3.416132  0.227276  1.304175 -7.576578  
+1220  3.393319 -3.191071 -0.544244  0.985557 -8.488138  
+1221  1.617300 -3.690932 -0.241286  2.365615 -7.326827  
 
 [1222 rows x 12 columns]</code></pre>
 </div>
@@ -1046,8 +1046,8 @@ weighted avg       1.00      1.00      1.00      1223</code></pre>
 </div>
 <p>These numbers suggest that 5 individuals who are of Ad-mixed American genetic ancestry have been incorrectly labelled as European but overall this classifier seems to perform well given the confusion matrix, precision and recall.</p>
 </section>
-<section id="applying-tuned-machine-learning-algorithm-to-study" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="applying-tuned-machine-learning-algorithm-to-study"><span class="header-section-number">10.4</span> Applying tuned machine-learning algorithm to study</h2>
+<section id="applying-machine-learning-algorithm-with-tuned-hyperparameters" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="applying-machine-learning-algorithm-with-tuned-hyperparameters"><span class="header-section-number">10.4</span> Applying machine-learning algorithm with tuned hyperparameters</h2>
 <p>Now we have the arguments that minimize the classification error rate in the reference data, we can apply them to our study data to label each individual with their genetic ancestry based on their proximity to the individuals in the reference data. Again, we will use the first 5 PCs to do this.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create standardized principal components for the study individuals we are trying to classify</span></span>
@@ -1083,30 +1083,30 @@ Name: count, dtype: int64</code></pre>
 <span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>samples_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.223171   
-1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543573 -10.402502   
-2         EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.811757   
-3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.217198   
-4         EUR  HG00105 -13.501380  34.263998 -10.330082  11.573441  -8.824136   
+0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522424  -9.248659   
+1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543570 -10.380949   
+2         EUR  HG00101 -15.388023  32.814107 -10.876452  11.691985  -6.806517   
+3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879079  -5.199596   
+4         EUR  HG00105 -13.501380  34.263998 -10.330081  11.573443  -8.856633   
 ...       ...      ...        ...        ...        ...        ...        ...   
-1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879759   6.244474   
-1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.266181   
-1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.199675   
-1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983942   
-1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312040  12.235562   
+1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879760   6.244087   
+1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.265334   
+1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.203425   
+1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.984097   
+1221  NA21143  NA21143 -16.582568   9.514909  22.259031  -4.312041  12.234487   
 
            PC6       PC7       PC8       PC9      PC10  POP  
-0    -0.888078 -4.567888 -3.391945 -3.684503 -1.562291  EUR  
-1    -1.713591 -6.016420 -4.111053 -2.977852 -0.108797  EUR  
-2    -0.553221 -2.817986 -5.671878 -4.101227  0.976221  EUR  
-3    -1.242405 -3.750483 -5.727512 -3.820737 -0.938805  EUR  
-4    -0.955391 -2.830745 -3.036682 -1.768552 -3.202078  EUR  
+0    -0.878138 -4.520736 -3.365676 -4.221558  1.107865  EUR  
+1    -1.693816 -5.966099 -3.783902 -3.527381  0.614973  EUR  
+2    -0.587681 -2.750775 -5.732242 -3.818476  2.210309  EUR  
+3    -1.299292 -3.553589 -5.761407 -3.533703  0.833023  EUR  
+4    -0.963731 -2.920343 -3.335881 -2.428733 -1.363890  EUR  
 ...        ...       ...       ...       ...       ...  ...  
-1217  0.751537 -4.816121 -2.867464  2.941782 -7.183444  SAS  
-1218  1.197940 -4.846997 -3.246102  4.019751 -6.715075  SAS  
-1219  1.417505 -3.467693  0.030532  1.131823 -7.046247  SAS  
-1220  3.392113 -3.229647 -0.769242  0.931158 -8.085938  SAS  
-1221  1.622644 -3.755588 -0.478032  2.094427 -7.072027  SAS  
+1217  0.755760 -4.808882 -2.705048  2.953586 -7.807425  SAS  
+1218  1.198882 -4.817298 -2.986732  3.898059 -7.458517  SAS  
+1219  1.418397 -3.416132  0.227276  1.304175 -7.576578  SAS  
+1220  3.393319 -3.191071 -0.544244  0.985557 -8.488138  SAS  
+1221  1.617300 -3.690932 -0.241286  2.365615 -7.326827  SAS  
 
 [2445 rows x 13 columns]</code></pre>
 </div>
