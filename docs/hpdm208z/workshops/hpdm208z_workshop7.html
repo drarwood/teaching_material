@@ -647,7 +647,7 @@ J              0           1           0          0          0</code></pre>
 <p>In the <code>t2d_study_5k_subs_10k_vars</code> file set, there are 1,000 cases and 4,000 controls for T2D, labelled <code>2</code> and <code>1</code> in the <code>.fam</code>, respectively. We will test the association for the 10k genetic variants to see if any of the genetic variants are associated with T2D status in our dataset.</p>
 <p>Run the following command:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/hpdm08z/programs/plink</span> <span class="dt">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/hpdm208z/programs/plink</span> <span class="dt">\</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--bfile</span> t2d_study_5k <span class="dt">\</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logistic</span> <span class="dt">\</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> t2d_gwas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -703,7 +703,7 @@ J              0           1           0          0          0</code></pre>
 </tr>
 <tr class="even">
 <td><code>NMISS</code></td>
-<td>Number of individuals that went into t allele on the outcome</td>
+<td>Number of individuals that went into the analysis (Not MISSing from analysis)</td>
 </tr>
 <tr class="odd">
 <td><code>STAT</code></td>
