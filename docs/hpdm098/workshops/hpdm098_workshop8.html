@@ -709,16 +709,11 @@ Index: []</code></pre>
 </ul>
 <p>We are going to use the <code>ref_samples_for_pca.txt</code> file that contains the data we need to generate the PC-space.</p>
 <p><strong>-IMPORTANT-</strong></p>
-<p><strong>Note, we can create a similar file if were given <code>.bed</code> <code>.bim</code> <code>.fam</code> files and asked plink to <code>--recodeA</code> the data to human readable format. We would also want to keep track of which allele is the coding allele for later use when we try and project the study of interest into the reference PC-space. We can do this by extracting out the variant id and first allele on each line of the .bim file associated with the reference dataset but note that when using <code>--recodeA</code> plink will provide numerical genotypes coded to the minor allele by default. If the first allele on a bim file line of the reference dataset is not the minor allele (perhaps the <code>--a1-allele</code> flag was used when creating the genetic dataset for the reference samples), then this could create problems later on for our PCA analysis when we try to project our samples into the PC space. One way around this is to put a given reference dataset to be used for PCA through PLINK and simply re-create the data so that A1 becomes the minor allele. For example, if we had files called <code>ref_data_for_pca.[bed|bim|fam]</code> and we were unsure if A1 was the minor allele, we should use the following PLINK command to ensure A1 is the minor allele in the bim file:</strong></p>
-<pre><code>plink \
-  --bfile ref_data \
-  --make-bed \
-  --out ref_data_a1_minor_allele</code></pre>
-<p><strong>We would then subsequently use the <code>ref_data_a1_minor_allele.[bed|bim|fam]</code> files in conjunction with the <code>--recodeA</code> option in PLINK to generate a dataset we could use for PCA.</strong></p>
+<p><strong>Note, we can create a similar file if were given <code>.bed</code> <code>.bim</code> <code>.fam</code> files and asked plink to <code>--recodeA</code> the data to human readable format.</strong></p>
 <p>First, create a Pandas DF called <code>ref_samples</code> that contains the population code and sample ID in the columns <code>FID</code> and <code>IID</code>, respectively. We will merge the calculated principal component values associated with each sample with this DF later on.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ref_samples <span class="op">=</span> pd.read_csv(<span class="st">"ref_samples_for_pca.txt"</span>, usecols<span class="op">=</span>[<span class="st">"FID"</span>,<span class="st">"IID"</span>], delimiter<span class="op">=</span><span class="st">" "</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ref_samples.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ref_samples <span class="op">=</span> pd.read_csv(<span class="st">"ref_samples_for_pca.txt"</span>, usecols<span class="op">=</span>[<span class="st">"FID"</span>,<span class="st">"IID"</span>], delimiter<span class="op">=</span><span class="st">" "</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>ref_samples.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   FID      IID
 0  EUR  HG00097
@@ -730,17 +725,17 @@ Index: []</code></pre>
 </div>
 <p>Now load the genotypes of 100,000 SNPs in 1,223 individuals found in the reference data into 2D numpy array.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip header, and extract columns 3 - 100,002 (indexed as 2 to 100001)</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> np.loadtxt(fname<span class="op">=</span><span class="st">"ref_samples_for_pca.txt"</span>, skiprows<span class="op">=</span><span class="dv">1</span>, usecols<span class="op">=</span>np.arange(<span class="dv">2</span>,<span class="dv">100002</span>)) </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>X1.shape </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip header, and extract columns 3 - 100,002 (indexed as 2 to 100001)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>X1 <span class="op">=</span> np.loadtxt(fname<span class="op">=</span><span class="st">"ref_samples_for_pca.txt"</span>, skiprows<span class="op">=</span><span class="dv">1</span>, usecols<span class="op">=</span>np.arange(<span class="dv">2</span>,<span class="dv">100002</span>)) </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>X1.shape </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(1223, 100000)</code></pre>
 </div>
 </div>
 <p>We will now perform PCA using the reference dataset and return the first 10 PCs using the <code>scikit-learn</code> library:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>Y1 <span class="op">=</span> pca.fit_transform(X1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>Y1 <span class="op">=</span> pca.fit_transform(X1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>Y1</code> is a 2D numpy array containing the values of the first 10 principal components for each individual.</p>
 <p>Note that is common to scale and mean-centre data prior to performing PCA analysis. However, we do not need to provide explicit code for this because:</p>
@@ -750,37 +745,37 @@ Index: []</code></pre>
 </ul>
 <p>Let’s merge the <code>ref_samples</code> DF and the numpy array <code>Y1</code> (which we will convert to a Pandas DF) together to visualise the data. Note rows in the matrix containing the PC values are in the same order as the rows in the genotype reference data, making it easy to merge IDs:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs <span class="op">=</span> pd.concat([ref_samples, pd.DataFrame(Y1)], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs.columns <span class="op">=</span> [<span class="st">"FID"</span>,<span class="st">"IID"</span>,<span class="st">"PC1"</span>,<span class="st">"PC2"</span>,<span class="st">"PC3"</span>,<span class="st">"PC4"</span>,<span class="st">"PC5"</span>,<span class="st">"PC6"</span>,<span class="st">"PC7"</span>,<span class="st">"PC8"</span>,<span class="st">"PC9"</span>,<span class="st">"PC10"</span>]</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs <span class="op">=</span> pd.concat([ref_samples, pd.DataFrame(Y1)], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs.columns <span class="op">=</span> [<span class="st">"FID"</span>,<span class="st">"IID"</span>,<span class="st">"PC1"</span>,<span class="st">"PC2"</span>,<span class="st">"PC3"</span>,<span class="st">"PC4"</span>,<span class="st">"PC5"</span>,<span class="st">"PC6"</span>,<span class="st">"PC7"</span>,<span class="st">"PC8"</span>,<span class="st">"PC9"</span>,<span class="st">"PC10"</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>ref_sample_pcs.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0  EUR  HG00097 -14.426319  33.251409  -9.001286   9.522423  -9.243238   
-1  EUR  HG00099 -13.755650  34.191333  -9.868827  10.543571 -10.401374   
-2  EUR  HG00101 -15.388023  32.814107 -10.876452  11.691986  -6.823533   
-3  EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.203239   
-4  EUR  HG00105 -13.501380  34.263998 -10.330082  11.573443  -8.833895   
+0  EUR  HG00097 -14.426319  33.251409  -9.001286   9.522422  -9.213772   
+1  EUR  HG00099 -13.755650  34.191333  -9.868827  10.543571 -10.402089   
+2  EUR  HG00101 -15.388023  32.814107 -10.876453  11.691983  -6.796927   
+3  EUR  HG00102 -14.205595  34.352392  -9.414806  10.879080  -5.200474   
+4  EUR  HG00105 -13.501380  34.263998 -10.330081  11.573442  -8.797539   
 
         PC6       PC7       PC8       PC9      PC10  
-0 -0.858053 -4.530732 -3.605227  4.533223 -0.390243  
-1 -1.685179 -6.015799 -4.497892  3.368698 -0.002567  
-2 -0.557270 -3.032449 -5.492636  3.134061  0.634533  
-3 -1.270259 -3.748601 -5.546256  3.029687 -0.898188  
-4 -0.927330 -2.767642 -2.942096  2.256123 -2.757774  </code></pre>
+0 -0.795006 -4.585845 -3.404412 -3.763634 -0.098762  
+1 -1.666550 -6.175179 -4.286805 -4.215347 -0.227820  
+2 -0.558444 -2.768013 -5.891156 -4.834624  2.062490  
+3 -1.288963 -3.631373 -6.003386 -3.202947  0.252170  
+4 -0.878640 -2.880708 -3.086955 -2.050925 -1.495746  </code></pre>
 </div>
 </div>
 <p>Now we can plot the PC values of each individual, colour coded by the genetic ancestry of the individual as recorded by the 1000 Genomes project. Let’s start by plotting PC1 against PC2.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ref_groups <span class="op">=</span> ref_sample_pcs.groupby(<span class="st">"FID"</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> ref_groups:</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC1, group.PC2, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project: PC1 vs PC2"</span>)</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC1"</span>)</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC2"</span>)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>ref_groups <span class="op">=</span> ref_sample_pcs.groupby(<span class="st">"FID"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ax.margins(<span class="fl">0.05</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, group <span class="kw">in</span> ref_groups:</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    ax.plot(group.PC1, group.PC2, marker<span class="op">=</span><span class="st">"x"</span>, linestyle<span class="op">=</span><span class="st">""</span>, ms<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span>name)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Principal Component Space for Individuals in 1000G Project: PC1 vs PC2"</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"PC1"</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"PC2"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -801,8 +796,16 @@ Index: []</code></pre>
 <p>Now that we have defined a principal component space for the reference data we have from the 1000 Genomes Project, we will now project new samples into the same space. However, <strong>we must ensure the following</strong>:</p>
 <ul>
 <li>the same 100,000 variables (i.e.&nbsp;SNPs) found in the reference data are available in the new sample data and in the same column order</li>
-<li>the numerical representation of genotypes for SNPs in the new sample data is the <strong>same</strong> as the reference data. For example, an A/G SNP coded as <code>0=AA, 1=AG, 2=GG</code> in the reference data must be coded the same way in the new sample data (so not <code>0=GG, 1=AG, 2=AA</code>). Note, the alleles are already aligned in this workshop so we don’t have to worry about this here. <strong>However, this is usually <em>not</em> the case. In these scenarios, if you knew the genotypes for the reference dataset were codeded to represent the number of minor alleles carried, then you should be able to write the id and first allele listed on each line of the reference dataset’s .bim file to a new file and use that in conjunction with the <code>--a1-allele</code> command line option to export the study data using <code>--recodeA</code> ready for PC projection.</strong></li>
+<li>the numerical representation of genotypes for SNPs in the new sample data is the <strong>same</strong> as the reference data. For example, an A/G SNP coded as <code>0=AA, 1=AG, 2=GG</code> in the reference data must be coded the same way in the new sample data (so not <code>0=GG, 1=AG, 2=AA</code>). Note, the alleles are already aligned in this workshop so we don’t have to worry about this here. However, this is usually <em>not</em> the case. In these scenarios, we need to keep track of which allele is the coding allele in the reference data set.</li>
 </ul>
+<p>If we had made a human readable file for the genotypes of a reference dataset in PLINK (using <code>--recodeA</code>), then we can use the header to tell us which allele is coding the genotypes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span> <span class="at">-1</span> reference.raw <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="st">'s/ /\n/g'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span> +7 <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sed</span> <span class="st">'s/_/\t/'</span> <span class="op">&gt;</span> reference_data_genotype_coding_alleles.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Then, we can use the <code>--a1-allele</code> command line option with <code>reference_data_genotype_coding_alleles.txt</code> file to export the study data to readable format using <code>--recodeA</code> having forced the genotype codes to be aligned with the reference dataset ready for PC projection.</strong></p>
 <p>First, load in the study genotypes into Pandas DFs as before - one to hold genetic ancestry (currently unknown) and the unique identifier of each individual. Note the file to be read in is of the same format as the reference dataset.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>study_samples <span class="op">=</span> pd.read_csv(<span class="st">"study_samples_for_pca.txt"</span>, usecols<span class="op">=</span>[<span class="st">"FID"</span>, <span class="st">"IID"</span>], delimiter<span class="op">=</span><span class="st">" "</span>)</span>
@@ -835,18 +838,18 @@ Index: []</code></pre>
 <span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>study_sample_pcs.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       FID      IID        PC1        PC2        PC3        PC4       PC5  \
-0  HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696763 -3.579485   
-1  HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149988 -1.573061   
-2  HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536956 -3.965200   
-3  HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378977  0.757442   
-4  HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656 -3.192757   
+0  HG00096  HG00096 -13.542557  32.377174 -10.895992  10.696762 -3.582777   
+1  HG00100  HG00100 -14.004313  32.241526 -11.099382  13.149988 -1.569942   
+2  HG00103  HG00103 -14.483089  32.607163  -9.351953  10.536956 -3.958699   
+3  HG00109  HG00109 -15.951840  32.533731 -10.473870  12.378976  0.756660   
+4  HG00112  HG00112 -15.633836  33.225539  -8.937601  11.162656 -3.190543   
 
         PC6       PC7       PC8       PC9      PC10  
-0 -1.753979 -1.738055 -0.561470  2.867458  2.865441  
-1 -0.841542  1.151187  0.590756  2.716565 -3.820226  
-2 -1.072251 -2.836283 -1.510821  2.932046  1.400717  
-3  3.084116  1.542570 -2.940313 -3.154360 -2.195597  
-4 -0.326775 -1.811344 -3.505738  0.842303  0.499343  </code></pre>
+0 -1.756754 -1.716350 -0.651536 -2.917835  3.340370  
+1 -0.843277  1.140518  0.528286 -3.132466 -3.594961  
+2 -1.062969 -2.838446 -1.539594 -3.045306  2.050343  
+3  3.075834  1.587727 -3.026655  2.874981 -1.891704  
+4 -0.313656 -1.833699 -3.504873 -0.870026  1.036880  </code></pre>
 </div>
 </div>
 <p>We can now plot the reference data with the new samples overlaid. For example, to plot PC1 vs PC2 again, we can use the following code:</p>
@@ -865,7 +868,7 @@ Index: []</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-29-3.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-30-3.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -883,7 +886,7 @@ Index: []</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-29-4.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-30-4.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1034,10 +1037,10 @@ X2[inds] = np.take(mean_genotypes, inds[1])</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>POP
 AFR    309
-EUR    270
+EUR    269
 EAS    242
 SAS    226
-AMR    175
+AMR    176
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
@@ -1053,30 +1056,30 @@ Name: count, dtype: int64</code></pre>
 <span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>samples_combined</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          FID      IID        PC1        PC2        PC3        PC4        PC5  \
-0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522423  -9.243238   
-1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543571 -10.401374   
-2         EUR  HG00101 -15.388023  32.814107 -10.876452  11.691986  -6.823533   
-3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879081  -5.203239   
-4         EUR  HG00105 -13.501380  34.263998 -10.330082  11.573443  -8.833895   
+0         EUR  HG00097 -14.426319  33.251409  -9.001286   9.522422  -9.213772   
+1         EUR  HG00099 -13.755650  34.191333  -9.868827  10.543571 -10.402089   
+2         EUR  HG00101 -15.388023  32.814107 -10.876453  11.691983  -6.796927   
+3         EUR  HG00102 -14.205595  34.352392  -9.414806  10.879080  -5.200474   
+4         EUR  HG00105 -13.501380  34.263998 -10.330081  11.573442  -8.797539   
 ...       ...      ...        ...        ...        ...        ...        ...   
-1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879760   6.248034   
-1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778283   6.266905   
-1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750599  14.204825   
-1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983202   
-1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312041  12.235938   
+1217  NA21133  NA21133 -14.312609  10.960837  22.269198  -5.879760   6.246577   
+1218  NA21135  NA21135 -14.455674  10.530066  23.284110  -5.778282   6.265025   
+1219  NA21141  NA21141 -15.601229  10.736895  22.619389  -3.750600  14.202050   
+1220  NA21142  NA21142 -15.895942  10.651730  21.200307  -2.984751  13.983734   
+1221  NA21143  NA21143 -16.582568   9.514909  22.259032  -4.312041  12.231054   
 
            PC6       PC7       PC8       PC9      PC10  POP  
-0    -0.858053 -4.530732 -3.605227  4.533223 -0.390243  EUR  
-1    -1.685179 -6.015799 -4.497892  3.368698 -0.002567  EUR  
-2    -0.557270 -3.032449 -5.492636  3.134061  0.634533  EUR  
-3    -1.270259 -3.748601 -5.546256  3.029687 -0.898188  EUR  
-4    -0.927330 -2.767642 -2.942096  2.256123 -2.757774  EUR  
+0    -0.795006 -4.585845 -3.404412 -3.763634 -0.098762  EUR  
+1    -1.666550 -6.175179 -4.286805 -4.215347 -0.227820  EUR  
+2    -0.558444 -2.768013 -5.891156 -4.834624  2.062490  EUR  
+3    -1.288963 -3.631373 -6.003386 -3.202947  0.252170  EUR  
+4    -0.878640 -2.880708 -3.086955 -2.050925 -1.495746  EUR  
 ...        ...       ...       ...       ...       ...  ...  
-1217  0.743794 -4.820005 -2.934570 -3.053095 -7.362249  SAS  
-1218  1.190696 -4.834074 -3.271024 -4.221710 -7.236675  SAS  
-1219  1.419038 -3.460979 -0.046311 -1.319851 -7.479299  SAS  
-1220  3.389794 -3.236832 -0.817742 -1.117830 -8.389329  SAS  
-1221  1.619755 -3.732127 -0.558068 -2.372038 -7.214804  SAS  
+1217  0.762041 -4.720464 -2.820133  3.071020 -7.429806  SAS  
+1218  1.209369 -4.713941 -3.160942  4.149267 -7.197263  SAS  
+1219  1.429776 -3.347426  0.065995  1.322236 -7.199973  SAS  
+1220  3.404077 -3.094520 -0.671116  0.999127 -8.148937  SAS  
+1221  1.626143 -3.616050 -0.393397  2.272385 -7.320969  SAS  
 
 [2445 rows x 13 columns]</code></pre>
 </div>
@@ -1094,7 +1097,7 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-39-7.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-40-7.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1110,7 +1113,7 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-39-8.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-40-8.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1126,7 +1129,7 @@ Name: count, dtype: int64</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-39-9.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="hpdm098_workshop8_files/figure-html/unnamed-chunk-40-9.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1160,18 +1163,18 @@ Name: count, dtype: int64</code></pre>
 4  HG00112  HG00112  0  0    2            1  HG00112 -15.633836  33.225539   
 
          PC3        PC4       PC5       PC6       PC7       PC8       PC9  \
-0 -10.895992  10.696763 -3.579485 -1.753979 -1.738055 -0.561470  2.867458   
-1 -11.099382  13.149988 -1.573061 -0.841542  1.151187  0.590756  2.716565   
-2  -9.351953  10.536956 -3.965200 -1.072251 -2.836283 -1.510821  2.932046   
-3 -10.473870  12.378977  0.757442  3.084116  1.542570 -2.940313 -3.154360   
-4  -8.937601  11.162656 -3.192757 -0.326775 -1.811344 -3.505738  0.842303   
+0 -10.895992  10.696762 -3.582777 -1.756754 -1.716350 -0.651536 -2.917835   
+1 -11.099382  13.149988 -1.569942 -0.843277  1.140518  0.528286 -3.132466   
+2  -9.351953  10.536956 -3.958699 -1.062969 -2.838446 -1.539594 -3.045306   
+3 -10.473870  12.378976  0.756660  3.075834  1.587727 -3.026655  2.874981   
+4  -8.937601  11.162656 -3.190543 -0.313656 -1.833699 -3.504873 -0.870026   
 
        PC10  POP  
-0  2.865441  EUR  
-1 -3.820226  EUR  
-2  1.400717  EUR  
-3 -2.195597  EUR  
-4  0.499343  EUR  </code></pre>
+0  3.340370  EUR  
+1 -3.594961  EUR  
+2  2.050343  EUR  
+3 -1.891704  EUR  
+4  1.036880  EUR  </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate counts of cases and controls across labels of inferred genetic ancestry</span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>pd.crosstab(merged_study_df[<span class="st">"POP"</span>], merged_study_df[<span class="st">"CASE_STATUS"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1179,9 +1182,9 @@ Name: count, dtype: int64</code></pre>
 <pre><code>CASE_STATUS    0    1
 POP                  
 AFR          278   31
-AMR          157   18
+AMR          158   18
 EAS          121  121
-EUR          243   27
+EUR          242   27
 SAS          203   23</code></pre>
 </div>
 </div>
